@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import com.congo.springmvc.model.CongoCustomers;
 
-public class CongoCustomersDAO {
+public class CustomersDAO {
 	
 	private PreparedStatement statement = null;
 	private ResultSet resultSet = null;
@@ -43,13 +43,13 @@ public class CongoCustomersDAO {
 	 * Singleton Design Pattern
 	 * means that only one instance of this DAO can exist at a time, eliminating the possibility of errors in the database
 	 */
-	private static CongoCustomersDAO instance = null;
+	private static CustomersDAO instance = null;
 	
-	private CongoCustomersDAO() {}
+	private CustomersDAO() {}
 	
-	public static CongoCustomersDAO getInstance() {
+	public static CustomersDAO getInstance() {
 		if(instance == null) {
-			instance = new CongoCustomersDAO();
+			instance = new CustomersDAO();
 		}
 		return instance;
 	}
@@ -58,7 +58,7 @@ public class CongoCustomersDAO {
 	 * Main method for testing the DAO
 	 */
 	public static void main(String[] args) {
-		CongoCustomersDAO cdao = CongoCustomersDAO.getInstance();
+		CustomersDAO cdao = CustomersDAO.getInstance();
 		ArrayList<CongoCustomers> customers = cdao.findAllCustomers();
 		System.out.println(customers);
 	}

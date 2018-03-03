@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.congo.springmvc.model.MusicCategories;
 import com.congo.springmvc.model.MusicRecordings;
 
-public class MusicRecordingsDAO {
+public class MusicDAO {
 	
 	private PreparedStatement statement = null;
 	private ResultSet resultSet = null;
@@ -16,6 +17,7 @@ public class MusicRecordingsDAO {
 	// SQL Queries
 	private static String FIND_ALL_RECORDINGS = "SELECT * FROM Music_Recordings";
 	private static String FIND_RECORDINGS_BY_CATEGORY = "SELECT * FROM Music_Recordings WHERE category = ?";
+	private static String FIND_ALL_CATEGORIES = "SELECT * FROM Music_Categories";
 	
 	
 	public ArrayList<MusicRecordings> findAllRecordings() {
@@ -43,17 +45,38 @@ public class MusicRecordingsDAO {
 		return recordings;
 	}
 	
+	public ArrayList<MusicCategories> findAllCategories() {
+		ArrayList<MusicCategories> categories = new ArrayList<MusicCategories>();
+		try {
+			Connection conn = new DBConnection().openConnection();
+			statement = conn.prepareStatement(FIND_ALL_CATEGORIES);
+			resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				int id = resultSet.getInt("id");
+				String name = resultSet.getString("name");
+				MusicCategories category = new MusicCategories(id, name);
+				categories.add(category);
+			}
+			resultSet.close();
+			statement.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return categories;
+	}
+	
 	/**
 	 * Singleton Design Pattern
 	 * means that only one instance of this DAO can exist at a time, eliminating the possibility of errors in the database
 	 */
-	private static MusicRecordingsDAO instance = null;
+	private static MusicDAO instance = null;
 	
-	private MusicRecordingsDAO() {}
+	private MusicDAO() {}
 	
-	public static MusicRecordingsDAO getInstance() {
+	public static MusicDAO getInstance() {
 		if(instance == null) {
-			instance = new MusicRecordingsDAO();
+			instance = new MusicDAO();
 		}
 		return instance;
 	}
@@ -62,7 +85,7 @@ public class MusicRecordingsDAO {
 	 * Main method for testing the DAO
 	 */
 	public static void main(String[] args) {
-		MusicRecordingsDAO cdao = MusicRecordingsDAO.getInstance();
+		MusicDAO cdao = MusicDAO.getInstance();
 		ArrayList<MusicRecordings> customers = cdao.findAllRecordings();
 		System.out.println(customers);
 	}
