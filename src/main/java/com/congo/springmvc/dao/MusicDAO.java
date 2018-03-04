@@ -15,16 +15,16 @@ public class MusicDAO {
 	private ResultSet resultSet = null;
 	
 	// SQL Queries
-	private static String FIND_ALL_RECORDINGS = "SELECT * FROM Music_Recordings";
-	private static String FIND_RECORDINGS_BY_CATEGORY = "SELECT * FROM Music_Recordings WHERE category = ?";
+	private static String FIND_ALL_ALBUMS = "SELECT * FROM Music_Recordings";
 	private static String FIND_ALL_CATEGORIES = "SELECT * FROM Music_Categories";
+	private static String FIND_ALBUMS_BY_CATEGORY = "SELECT * FROM Music_Recordings WHERE category = ?";
 	
 	
 	public ArrayList<MusicRecordings> findAllRecordings() {
-		ArrayList<MusicRecordings> recordings = new ArrayList<MusicRecordings>();
+		ArrayList<MusicRecordings> albums = new ArrayList<MusicRecordings>();
 		try {
 			Connection conn = new DBConnection().openConnection();
-			statement = conn.prepareStatement(FIND_ALL_RECORDINGS);
+			statement = conn.prepareStatement(FIND_ALL_ALBUMS);
 			resultSet = statement.executeQuery();
 			while(resultSet.next()) {
 				int recordingId = resultSet.getInt("recording_id");
@@ -34,7 +34,7 @@ public class MusicDAO {
 				int num_tracks = resultSet.getInt("num_tracks");
 				float price = resultSet.getFloat("price");
 				MusicRecordings record = new MusicRecordings(recordingId, artistName, title, category, num_tracks, price);
-				recordings.add(record);
+				albums.add(record);
 			}
 			resultSet.close();
 			statement.close();
@@ -42,7 +42,7 @@ public class MusicDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return recordings;
+		return albums;
 	}
 	
 	public ArrayList<MusicCategories> findAllCategories() {
@@ -66,9 +66,11 @@ public class MusicDAO {
 		return categories;
 	}
 	
+	
 	/**
 	 * Singleton Design Pattern
-	 * means that only one instance of this DAO can exist at a time, eliminating the possibility of errors in the database
+	 * means that only one instance of this DAO can exist at a time, eliminating 
+	 * the possibility of errors from concurrent threads accessing the database
 	 */
 	private static MusicDAO instance = null;
 	

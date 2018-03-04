@@ -24,6 +24,5 @@ public class ListController {
 		model.addAttribute("categories", this.mdao.findAllCategories());
 		return "categories";
 	}
-	
-	
+
 }
