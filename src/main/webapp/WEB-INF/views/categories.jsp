@@ -11,12 +11,31 @@
 <body>
 	<jsp:include page="layout/header.jsp"></jsp:include>
 	<br/>
-	<form>
-		<select>
+	<br/>
+	<form action="<spring:url value="/categories"/>" method="get">
+		<select name="category" onchange="this.form.submit()">
 			<c:forEach items="${categories}" var="category">
 				<option>${category.name}</option>
 			</c:forEach>
 		</select>
 	</form>
+	<br />
+	<br />
+	<table>
+		<tr>
+			<th>Recording ID</th><th>Artist</th><th>Album</th><th>Category</th><th>Number of Tracks</th><th>Price</th><th></th>
+		</tr>
+		<c:forEach items="${albums}" var="album">
+			<tr>
+				<td>${album.recordingId}</td>
+				<td>${album.artistName}</td>
+				<td>${album.title}</td>
+				<td>${album.category}</td>
+				<td>${album.num_tracks}</td>
+				<td>${album.price}</td>
+				<td><button>Add</button></td>
+			</tr>
+		</c:forEach>
+	</table>
 </body>
 </html>

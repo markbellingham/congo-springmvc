@@ -66,6 +66,29 @@ public class MusicDAO {
 		return categories;
 	}
 	
+	public ArrayList<MusicRecordings> findRecordingsByCategory(String selection) {
+		ArrayList<MusicRecordings> albums = new ArrayList<MusicRecordings>();
+		try {
+			Connection conn = new DBConnection().openConnection();
+			statement = conn.prepareStatement(FIND_ALBUMS_BY_CATEGORY);
+			statement.setString(1, selection);
+			resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				int recordingId = resultSet.getInt("recording_id");
+				String artistName = resultSet.getString("artist_name");
+				String title = resultSet.getString("title");
+				String category = resultSet.getString("category");
+				int num_tracks = resultSet.getInt("num_tracks");
+				float price = resultSet.getFloat("price");
+				MusicRecordings record = new MusicRecordings(recordingId, artistName, title, category, num_tracks, price);
+				albums.add(record);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return albums; 
+	}
+	
 	
 	/**
 	 * Singleton Design Pattern
