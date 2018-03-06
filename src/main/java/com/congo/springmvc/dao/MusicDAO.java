@@ -18,6 +18,7 @@ public class MusicDAO {
 	private static String FIND_ALL_ALBUMS = "SELECT * FROM Music_Recordings";
 	private static String FIND_ALL_CATEGORIES = "SELECT * FROM Music_Categories";
 	private static String FIND_ALBUMS_BY_CATEGORY = "SELECT * FROM Music_Recordings WHERE category = ?";
+	private static String FIND_ALBUMS_BY_PRICE = "SELECT * FROM Music_Recordings WHERE price >= ? AND price <= ? ORDER BY price, artist_name";
 	
 	
 	public ArrayList<MusicRecordings> findAllRecordings() {
@@ -89,9 +90,29 @@ public class MusicDAO {
 		return albums; 
 	}
 	
-	public ArrayList<MusicRecordings> findRecordingsByPrice(float price) {
+	public ArrayList<MusicRecordings> findRecordingsByPrice(int selectedPrice) {
 		ArrayList<MusicRecordings> albums = new ArrayList<MusicRecordings>();
-		
+		try {
+			float lowerPrice = (float) selectedPrice - 2;
+			float higherPrice = (float) selectedPrice;
+			Connection conn = new DBConnection().openConnection();
+			statement = conn.prepareStatement(FIND_ALBUMS_BY_PRICE);
+			statement.setFloat(1, lowerPrice);
+			statement.setFloat(2, higherPrice);
+			resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				int recordingId = resultSet.getInt("recording_id");
+				String artistName = resultSet.getString("artist_name");
+				String title = resultSet.getString("title");
+				String category = resultSet.getString("category");
+				int num_tracks = resultSet.getInt("num_tracks");
+				float price = resultSet.getFloat("price");
+				MusicRecordings record = new MusicRecordings(recordingId, artistName, title, category, num_tracks, price);
+				albums.add(record);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return albums;
 	}
 	

@@ -41,10 +41,8 @@ public class ListController {
 	
 	@RequestMapping(value="/price-picker",method=RequestMethod.GET,params={"price"})
 	public String listAlbumsByPrice(Model model, int price) {
-		float fprice = (float) price;
-		
 		model.addAttribute("price", this.mdao.findAllCategories());
-		model.addAttribute("albums", this.mdao.findRecordingsByPrice(fprice));
+		model.addAttribute("albums", this.mdao.findRecordingsByPrice(price));
 		return "price-picker";
 	}
 
