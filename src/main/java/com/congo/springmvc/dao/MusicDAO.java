@@ -89,6 +89,12 @@ public class MusicDAO {
 		return albums; 
 	}
 	
+	public ArrayList<MusicRecordings> findRecordingsByPrice(float price) {
+		ArrayList<MusicRecordings> albums = new ArrayList<MusicRecordings>();
+		
+		return albums;
+	}
+	
 	
 	/**
 	 * Singleton Design Pattern
