@@ -15,9 +15,9 @@ public class MusicDAO {
 	private ResultSet resultSet = null;
 	
 	// SQL Queries
-	private static String FIND_ALL_ALBUMS = "SELECT * FROM Music_Recordings";
+	private static String FIND_ALL_ALBUMS = "SELECT * FROM Music_Recordings ORDER BY artist_name";
 	private static String FIND_ALL_CATEGORIES = "SELECT * FROM Music_Categories";
-	private static String FIND_ALBUMS_BY_CATEGORY = "SELECT * FROM Music_Recordings WHERE category = ?";
+	private static String FIND_ALBUMS_BY_CATEGORY = "SELECT * FROM Music_Recordings WHERE category = ? ORDER BY artist_name";
 	private static String FIND_ALBUMS_BY_PRICE = "SELECT * FROM Music_Recordings WHERE price >= ? AND price <= ? ORDER BY price, artist_name";
 	
 	
