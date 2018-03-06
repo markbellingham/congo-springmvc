@@ -13,6 +13,8 @@ public class MusicDAO {
 	
 	private PreparedStatement statement = null;
 	private ResultSet resultSet = null;
+	private Connection conn = null;
+	private ArrayList<MusicRecordings> albums = new ArrayList<MusicRecordings>();
 	
 	// SQL Queries
 	private static String FIND_ALL_ALBUMS = "SELECT * FROM Music_Recordings ORDER BY artist_name";
@@ -22,9 +24,8 @@ public class MusicDAO {
 	
 	
 	public ArrayList<MusicRecordings> findAllRecordings() {
-		ArrayList<MusicRecordings> albums = new ArrayList<MusicRecordings>();
 		try {
-			Connection conn = new DBConnection().openConnection();
+			conn = new DBConnection().openConnection();
 			statement = conn.prepareStatement(FIND_ALL_ALBUMS);
 			resultSet = statement.executeQuery();
 			albums = addToArray(resultSet);
@@ -40,7 +41,7 @@ public class MusicDAO {
 	public ArrayList<MusicCategories> findAllCategories() {
 		ArrayList<MusicCategories> categories = new ArrayList<MusicCategories>();
 		try {
-			Connection conn = new DBConnection().openConnection();
+			conn = new DBConnection().openConnection();
 			statement = conn.prepareStatement(FIND_ALL_CATEGORIES);
 			resultSet = statement.executeQuery();
 			while(resultSet.next()) {
@@ -59,13 +60,15 @@ public class MusicDAO {
 	}
 	
 	public ArrayList<MusicRecordings> findRecordingsByCategory(String selection) {
-		ArrayList<MusicRecordings> albums = new ArrayList<MusicRecordings>();
 		try {
-			Connection conn = new DBConnection().openConnection();
+			conn = new DBConnection().openConnection();
 			statement = conn.prepareStatement(FIND_ALBUMS_BY_CATEGORY);
 			statement.setString(1, selection);
 			resultSet = statement.executeQuery();
 			albums = addToArray(resultSet);
+			resultSet.close();
+			statement.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -73,16 +76,18 @@ public class MusicDAO {
 	}
 	
 	public ArrayList<MusicRecordings> findRecordingsByPrice(int selectedPrice) {
-		ArrayList<MusicRecordings> albums = new ArrayList<MusicRecordings>();
 		try {
 			float lowerPrice = (float) selectedPrice - 2;
 			float higherPrice = (float) selectedPrice;
-			Connection conn = new DBConnection().openConnection();
+			conn = new DBConnection().openConnection();
 			statement = conn.prepareStatement(FIND_ALBUMS_BY_PRICE);
 			statement.setFloat(1, lowerPrice);
 			statement.setFloat(2, higherPrice);
 			resultSet = statement.executeQuery();
 			albums = addToArray(resultSet);
+			resultSet.close();
+			statement.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -90,7 +95,6 @@ public class MusicDAO {
 	}
 	
 	private ArrayList<MusicRecordings> addToArray(ResultSet resultSet) throws SQLException {
-		ArrayList<MusicRecordings> albums = new ArrayList<MusicRecordings>();
 		while(resultSet.next()) {
 			int recordingId = resultSet.getInt("recording_id");
 			String artistName = resultSet.getString("artist_name");
