@@ -27,16 +27,7 @@ public class MusicDAO {
 			Connection conn = new DBConnection().openConnection();
 			statement = conn.prepareStatement(FIND_ALL_ALBUMS);
 			resultSet = statement.executeQuery();
-			while(resultSet.next()) {
-				int recordingId = resultSet.getInt("recording_id");
-				String artistName = resultSet.getString("artist_name");
-				String title = resultSet.getString("title");
-				String category = resultSet.getString("category");
-				int num_tracks = resultSet.getInt("num_tracks");
-				float price = resultSet.getFloat("price");
-				MusicRecordings record = new MusicRecordings(recordingId, artistName, title, category, num_tracks, price);
-				albums.add(record);
-			}
+			albums = addToArray(resultSet);
 			resultSet.close();
 			statement.close();
 			conn.close();
@@ -74,19 +65,10 @@ public class MusicDAO {
 			statement = conn.prepareStatement(FIND_ALBUMS_BY_CATEGORY);
 			statement.setString(1, selection);
 			resultSet = statement.executeQuery();
-			while(resultSet.next()) {
-				int recordingId = resultSet.getInt("recording_id");
-				String artistName = resultSet.getString("artist_name");
-				String title = resultSet.getString("title");
-				String category = resultSet.getString("category");
-				int num_tracks = resultSet.getInt("num_tracks");
-				float price = resultSet.getFloat("price");
-				MusicRecordings record = new MusicRecordings(recordingId, artistName, title, category, num_tracks, price);
-				albums.add(record);
-			}
+			albums = addToArray(resultSet);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
 		return albums; 
 	}
 	
@@ -100,18 +82,24 @@ public class MusicDAO {
 			statement.setFloat(1, lowerPrice);
 			statement.setFloat(2, higherPrice);
 			resultSet = statement.executeQuery();
-			while(resultSet.next()) {
-				int recordingId = resultSet.getInt("recording_id");
-				String artistName = resultSet.getString("artist_name");
-				String title = resultSet.getString("title");
-				String category = resultSet.getString("category");
-				int num_tracks = resultSet.getInt("num_tracks");
-				float price = resultSet.getFloat("price");
-				MusicRecordings record = new MusicRecordings(recordingId, artistName, title, category, num_tracks, price);
-				albums.add(record);
-			}
+			albums = addToArray(resultSet);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		return albums;
+	}
+	
+	private ArrayList<MusicRecordings> addToArray(ResultSet resultSet) throws SQLException {
+		ArrayList<MusicRecordings> albums = new ArrayList<MusicRecordings>();
+		while(resultSet.next()) {
+			int recordingId = resultSet.getInt("recording_id");
+			String artistName = resultSet.getString("artist_name");
+			String title = resultSet.getString("title");
+			String category = resultSet.getString("category");
+			int num_tracks = resultSet.getInt("num_tracks");
+			float price = resultSet.getFloat("price");
+			MusicRecordings record = new MusicRecordings(recordingId, artistName, title, category, num_tracks, price);
+			albums.add(record);
 		}
 		return albums;
 	}
