@@ -41,9 +41,20 @@ public class ListController {
 	
 	@RequestMapping(value="/price-picker",method=RequestMethod.GET,params={"price"})
 	public String listAlbumsByPrice(Model model, int price) {
-		model.addAttribute("price", this.mdao.findAllCategories());
 		model.addAttribute("albums", this.mdao.findRecordingsByPrice(price));
 		return "price-picker";
+	}
+	
+	@RequestMapping(value="/artist-finder")
+	public String searchArtists() {
+		return "artist-finder";
+	}
+	
+	@RequestMapping(value="/artist-finder", method=RequestMethod.POST,params= {"name"})
+	public String listArtists(Model model, String name) {
+		name = name.toLowerCase();
+		model.addAttribute("albums", this.mdao.findRecordingsByArtist(name));
+		return "artist-finder";
 	}
 
 }

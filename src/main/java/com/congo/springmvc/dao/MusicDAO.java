@@ -14,13 +14,14 @@ public class MusicDAO {
 	private PreparedStatement statement = null;
 	private ResultSet resultSet = null;
 	private Connection conn = null;
-	private ArrayList<MusicRecordings> albums = new ArrayList<MusicRecordings>();
+	private ArrayList<MusicRecordings> albums = null;
 	
 	// SQL Queries
 	private static String FIND_ALL_ALBUMS = "SELECT * FROM Music_Recordings ORDER BY artist_name";
 	private static String FIND_ALL_CATEGORIES = "SELECT * FROM Music_Categories";
 	private static String FIND_ALBUMS_BY_CATEGORY = "SELECT * FROM Music_Recordings WHERE category = ? ORDER BY artist_name";
 	private static String FIND_ALBUMS_BY_PRICE = "SELECT * FROM Music_Recordings WHERE price >= ? AND price <= ? ORDER BY price, artist_name";
+	private static String FIND_ALBUMS_BY_ARTIST = "SELECT * FROM Music_Recordings WHERE LOWER(artist_name) LIKE ?";
 	
 	
 	public ArrayList<MusicRecordings> findAllRecordings() {
@@ -94,7 +95,24 @@ public class MusicDAO {
 		return albums;
 	}
 	
+	public ArrayList<MusicRecordings> findRecordingsByArtist(String name) {
+		try {
+			conn = new DBConnection().openConnection();
+			statement = conn.prepareStatement(FIND_ALBUMS_BY_ARTIST);
+			statement.setString(1, name);
+			resultSet = statement.executeQuery();
+			albums = addToArray(resultSet);
+			resultSet.close();
+			statement.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return albums;
+	}
+	
 	private ArrayList<MusicRecordings> addToArray(ResultSet resultSet) throws SQLException {
+		albums = new ArrayList<MusicRecordings>();
 		while(resultSet.next()) {
 			int recordingId = resultSet.getInt("recording_id");
 			String artistName = resultSet.getString("artist_name");
@@ -133,4 +151,5 @@ public class MusicDAO {
 		ArrayList<MusicRecordings> customers = cdao.findAllRecordings();
 		System.out.println(customers);
 	}
+
 }
