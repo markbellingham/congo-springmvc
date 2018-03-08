@@ -5,7 +5,7 @@
 
 <html>
 <head>
-	<title>Albums | Congo</title>
+	<title>Congo</title>
 	<spring:url value="/resources/css/home.css" var="mainCSS"/>
 	<link href="${mainCSS}" rel="stylesheet" />
 </head>
@@ -20,23 +20,18 @@
 			</p>
 			<br />
 			<br />
+			${album.title} by ${album.artistName}
+			<br/>
+			<br/>
 			<table>
 				<tr>	
-					<th>Artist</th>
-					<th>Album</th>
-					<th>Category</th>
-					<th>Number of Tracks</th>
-					<th>Price</th>
-					<th></th>
+					<th>Title</th>
+					<th>Duration</th>
 				</tr>
-				<c:forEach items="${albums}" var="album">
+				<c:forEach items="${tracks}" var="tracks">
 					<tr>
-						<td>${album.artistName}</td>
-						<td><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
-						<td>${album.category}</td>
-						<td>${album.num_tracks}</td>
-						<td>${album.price}</td>
-						<td><button>Add</button></td>
+						<td>${tracks.title}</td>
+						<td>${tracks.duration}</td>
 					</tr>
 				</c:forEach>
 			</table>

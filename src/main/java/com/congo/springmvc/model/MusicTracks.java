@@ -15,6 +15,12 @@ public class MusicTracks {
 		this.duration = duration;
 	}
 
+	public MusicTracks(String title, int duration) {
+		super();
+		this.title = title;
+		this.duration = duration;
+	}
+
 	public MusicTracks() {
 		super();
 	}

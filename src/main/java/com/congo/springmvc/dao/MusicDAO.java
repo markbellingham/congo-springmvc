@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.congo.springmvc.model.MusicCategories;
 import com.congo.springmvc.model.MusicRecordings;
+import com.congo.springmvc.model.MusicTracks;
 
 public class MusicDAO {
 	
@@ -16,12 +17,14 @@ public class MusicDAO {
 	private Connection conn = null;
 	private ArrayList<MusicRecordings> albums = null;
 	
-	// SQL Queries
+	// SQL Query Strings
 	private static String FIND_ALL_ALBUMS = "SELECT * FROM Music_Recordings ORDER BY artist_name";
 	private static String FIND_ALL_CATEGORIES = "SELECT * FROM Music_Categories";
 	private static String FIND_ALBUMS_BY_CATEGORY = "SELECT * FROM Music_Recordings WHERE category = ? ORDER BY artist_name";
 	private static String FIND_ALBUMS_BY_PRICE = "SELECT * FROM Music_Recordings WHERE price >= ? AND price <= ? ORDER BY price, artist_name";
 	private static String FIND_ALBUMS_BY_ARTIST = "SELECT * FROM Music_Recordings WHERE LOWER(artist_name) LIKE ?";
+	private static String FIND_ALBUM_TRACKS = "SELECT * FROM Music_Tracks WHERE recording_id = ?";
+	private static String FIND_ALBUM_BY_ID = "SELECT * FROM Music_Recordings WHERE recording_id = ?";
 	
 	
 	public ArrayList<MusicRecordings> findAllRecordings() {
@@ -118,14 +121,57 @@ public class MusicDAO {
 			String artistName = resultSet.getString("artist_name");
 			String title = resultSet.getString("title");
 			String category = resultSet.getString("category");
+			String image = resultSet.getString("image_name");
 			int num_tracks = resultSet.getInt("num_tracks");
 			float price = resultSet.getFloat("price");
-			MusicRecordings record = new MusicRecordings(recordingId, artistName, title, category, num_tracks, price);
+			int stockCount = resultSet.getInt("stock_count");
+			MusicRecordings record = new MusicRecordings(recordingId, artistName, title, category, image, num_tracks, price, stockCount);
 			albums.add(record);
 		}
 		return albums;
 	}
 	
+	public ArrayList<MusicTracks> findAlbumTracks(int recordingId) {
+		ArrayList<MusicTracks> tracks = new ArrayList<MusicTracks>();
+		try {
+			conn = new DBConnection().openConnection();
+			statement = conn.prepareStatement(FIND_ALBUM_TRACKS);
+			statement.setInt(1, recordingId);
+			resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				String title = resultSet.getString("title");
+				int duration = resultSet.getInt("duration");
+				MusicTracks track = new MusicTracks(title, duration);
+				tracks.add(track);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tracks;
+	}
+	
+	public MusicRecordings findAlbumById(int recordingId) {
+		MusicRecordings album = null;
+		try {
+			conn = new DBConnection().openConnection();
+			statement = conn.prepareStatement(FIND_ALBUM_BY_ID);
+			statement.setInt(1, recordingId);
+			resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				String artistName = resultSet.getString("artist_name");
+				String title = resultSet.getString("title");
+				String category = resultSet.getString("category");
+				String image = resultSet.getString("image_name");
+				int numTracks = resultSet.getInt("num_tracks");
+				float price = resultSet.getFloat("price");
+				int stockCount = resultSet.getInt("stock_count");
+				album = new MusicRecordings(recordingId, artistName, title, category, image, numTracks, price, stockCount);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return album;
+	}
 	
 	/**
 	 * Singleton Design Pattern
