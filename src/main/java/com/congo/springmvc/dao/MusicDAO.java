@@ -35,9 +35,10 @@ public class MusicDAO {
 			albums = addToArray(resultSet);
 			resultSet.close();
 			statement.close();
-			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection(conn);
 		}
 		return albums;
 	}
@@ -56,9 +57,10 @@ public class MusicDAO {
 			}
 			resultSet.close();
 			statement.close();
-			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection(conn);
 		}
 		return categories;
 	}
@@ -72,9 +74,10 @@ public class MusicDAO {
 			albums = addToArray(resultSet);
 			resultSet.close();
 			statement.close();
-			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection(conn);
 		}
 		return albums; 
 	}
@@ -91,9 +94,10 @@ public class MusicDAO {
 			albums = addToArray(resultSet);
 			resultSet.close();
 			statement.close();
-			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection(conn);
 		}
 		return albums;
 	}
@@ -107,9 +111,10 @@ public class MusicDAO {
 			albums = addToArray(resultSet);
 			resultSet.close();
 			statement.close();
-			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection(conn);
 		}
 		return albums;
 	}
@@ -144,8 +149,12 @@ public class MusicDAO {
 				MusicTracks track = new MusicTracks(title, duration);
 				tracks.add(track);
 			}
+			resultSet.close();
+			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection(conn);
 		}
 		return tracks;
 	}
@@ -167,8 +176,12 @@ public class MusicDAO {
 				int stockCount = resultSet.getInt("stock_count");
 				album = new MusicRecordings(recordingId, artistName, title, category, image, numTracks, price, stockCount);
 			}
+			resultSet.close();
+			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection(conn);
 		}
 		return album;
 	}
