@@ -13,7 +13,7 @@ import com.congo.springmvc.dao.MusicDAO;
 public class ListController {
 	
 	@Autowired
-	private MusicDAO mdao;
+	private MusicDAO mdao = MusicDAO.getInstance();
 	
 	@RequestMapping(value="/albums")
 	public String listAlbums(Model model) {
