@@ -34,9 +34,10 @@ public class ListController {
 		model.addAttribute("albums", this.mdao.findAllRecordings());
 		return "categories";
 	}
+
 	
 	@RequestMapping(value="/categories",method=RequestMethod.GET,params={"category"})
-	public String listAlbumsByCategory(Model model, String category) {
+	public String listAlbumsByCategory2(Model model, String category) {
 		model.addAttribute("categories", this.mdao.findAllCategories());
 		model.addAttribute("albums", this.mdao.findRecordingsByCategory(category));
 		return "categories";
@@ -55,6 +56,13 @@ public class ListController {
 	
 	@RequestMapping(value="/artist-finder")
 	public String searchArtists() {
+		return "artist-finder";
+	}
+	
+	@RequestMapping(value="/artist/{artistName}")
+	public String searchArtist(Model model, @PathVariable("artistName") String name) {
+		name = name.toLowerCase();
+		model.addAttribute("albums", this.mdao.findRecordingsByArtist(name));
 		return "artist-finder";
 	}
 	

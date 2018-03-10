@@ -30,13 +30,12 @@
 		<br />
 		<table>
 			<tr>
-				<th>Recording ID</th><th>Artist</th><th>Album</th><th>Category</th><th>Number of Tracks</th><th>Price</th><th></th>
+				<th>Artist</th><th>Album</th><th>Category</th><th>Number of Tracks</th><th>Price</th><th></th>
 			</tr>
 			<c:forEach items="${albums}" var="album">
 				<tr>
-					<td>${album.recordingId}</td>
-					<td>${album.artistName}</td>
-					<td>${album.title}</td>
+					<td><a href="<spring:url value="/artist/${album.artistName}"/>">${album.artistName}</a></td>
+					<td><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
 					<td>${album.category}</td>
 					<td>${album.num_tracks}</td>
 					<td>${album.price}</td>
