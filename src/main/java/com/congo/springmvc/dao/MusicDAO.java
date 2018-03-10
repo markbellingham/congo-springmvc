@@ -119,6 +119,12 @@ public class MusicDAO {
 		return albums;
 	}
 	
+	/**
+	 * Method used by the other functions to create an ArrayList of the albums
+	 * @param resultSet
+	 * @return ArrayList of type MusicRecordings
+	 * @throws SQLException
+	 */
 	private ArrayList<MusicRecordings> addToArray(ResultSet resultSet) throws SQLException {
 		albums = new ArrayList<MusicRecordings>();
 		while(resultSet.next()) {
@@ -206,9 +212,9 @@ public class MusicDAO {
 	 * Main method for testing the DAO
 	 */
 	public static void main(String[] args) {
-		MusicDAO cdao = MusicDAO.getInstance();
-		ArrayList<MusicRecordings> customers = cdao.findAllRecordings();
-		System.out.println(customers);
+		MusicDAO mdao = MusicDAO.getInstance();
+		ArrayList<MusicRecordings> albums = mdao.findAllRecordings();
+		System.out.println(albums);
 	}
 
 }
