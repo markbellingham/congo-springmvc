@@ -33,7 +33,7 @@
 					<tr>
 						<td><a href="<spring:url value="/artist/${album.artistName}"/>">${album.artistName}</a></td>
 						<td><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
-						<td>${album.category}</td>
+						<td><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
 						<td>${album.num_tracks}</td>
 						<td>${album.price}</td>
 						<td><button>Add</button></td>
