@@ -18,7 +18,7 @@
 			</p>
 			<br />
 			<br />
-			<table>
+			<table class="musicList sortable">
 				<tr>	
 					<th>Artist</th>
 					<th>Album</th>

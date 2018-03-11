@@ -21,7 +21,7 @@
 		</form>
 		<br />
 		<br />
-		<table>
+		<table class="musicList sortable">
 			<tr>
 				<th>Artist</th><th>Album</th><th>Category</th><th>Number of Tracks</th><th>Price</th><th></th>
 			</tr>

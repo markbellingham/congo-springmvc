@@ -5,8 +5,14 @@
 <%@attribute name="header" fragment="true" %>
 <%@attribute name="footer" fragment="true" %>
 <head>
-    <spring:url value="/resources/css/home.css" var="mainCSS"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sorttable.js"></script>
+    <link href="${pageContext.request.contextPath}/resources/css/congo.css" rel="stylesheet" />
+<!-- 
+    <spring:url value="/resources/js/sorttable.js" var="sorttableScript"/>
+    <script src="${sorttableScript}"></script>
+    <spring:url value="/resources/css/congo.css" var="mainCSS"/>
     <link href="${mainCSS}" rel="stylesheet" />
+-->
 </head>
 <div id="pageheader">
    	<h1>Congo's Music Store</h1>

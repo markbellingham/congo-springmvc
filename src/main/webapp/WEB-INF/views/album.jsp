@@ -19,7 +19,7 @@
 			<br />
 			<br />
 			<h2>${album.title} by ${album.artistName}</h2>
-			<table>
+			<table class="musicList sortable">
 				<tr>	
 					<th>Title</th>
 					<th>Duration</th>
