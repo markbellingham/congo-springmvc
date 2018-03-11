@@ -3,12 +3,10 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<html>
 <head>
-	<title>Congo</title>
-	<spring:url value="/resources/css/home.css" var="mainCSS"/>
-	<link href="${mainCSS}" rel="stylesheet" />
+    <title>${album.title} by ${album.artistName} | Congo</title>
 </head>
+<html>
 	<t:genericpage>
 		<jsp:attribute name="header">
 	   	</jsp:attribute>
@@ -20,9 +18,7 @@
 			</p>
 			<br />
 			<br />
-			${album.title} by ${album.artistName}
-			<br/>
-			<br/>
+			<h2>${album.title} by ${album.artistName}</h2>
 			<table>
 				<tr>	
 					<th>Title</th>

@@ -6,8 +6,6 @@
 <html>
 <head>
 	<title>Price Picker | Congo</title>
-	<spring:url value="/resources/css/home.css" var="mainCSS"/>
-	<link href="${mainCSS}" rel="stylesheet" />
 </head>
 	<t:genericpage>
 		<jsp:attribute name="header">

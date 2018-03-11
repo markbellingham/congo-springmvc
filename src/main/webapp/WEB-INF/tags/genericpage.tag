@@ -4,6 +4,10 @@
 
 <%@attribute name="header" fragment="true" %>
 <%@attribute name="footer" fragment="true" %>
+<head>
+    <spring:url value="/resources/css/home.css" var="mainCSS"/>
+    <link href="${mainCSS}" rel="stylesheet" />
+</head>
 <div id="pageheader">
    	<h1>Congo's Music Store</h1>
 	<a href="<spring:url value="/"/>">Home</a> | 
