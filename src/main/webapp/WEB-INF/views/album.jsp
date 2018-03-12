@@ -24,10 +24,10 @@
 					<th>Title</th>
 					<th>Duration</th>
 				</tr>
-				<c:forEach items="${tracks}" var="tracks">
+				<c:forEach items="${tracks}" var="track">
 					<tr>
-						<td>${tracks.title}</td>
-						<td>${tracks.duration}</td>
+						<td>${track.title}</td>
+						<td>${track.strDuration}</td>
 					</tr>
 				</c:forEach>
 			</table>

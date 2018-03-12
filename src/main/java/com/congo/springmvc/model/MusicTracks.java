@@ -6,6 +6,7 @@ public class MusicTracks {
 	private int recordingId;
 	private String title;
 	private int duration;
+	private String strDuration;
 	
 	public MusicTracks(int id, int recordingId, String title, int duration) {
 		super();
@@ -14,11 +15,11 @@ public class MusicTracks {
 		this.title = title;
 		this.duration = duration;
 	}
-
-	public MusicTracks(String title, int duration) {
+	
+	public MusicTracks(String title, String strDuration) {
 		super();
 		this.title = title;
-		this.duration = duration;
+		this.strDuration = strDuration;
 	}
 
 	public MusicTracks() {
@@ -57,6 +58,21 @@ public class MusicTracks {
 	}
 	public void setDuration(int duration) {
 		this.duration = duration;
+	}
+	
+	public String getStrDuration() {
+		return strDuration;
+	}
+
+	public void setStrDuration(String strDuration) {
+		this.strDuration = strDuration;
+	}
+	
+	public static String formatDuration(int duration) {
+		int minutes = duration / 60;
+		int seconds = duration % 60;
+		String formattedDuration = minutes + "m" + seconds + "s";
+		return formattedDuration;
 	}
 
 }

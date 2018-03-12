@@ -152,7 +152,8 @@ public class MusicDAO {
 			while(resultSet.next()) {
 				String title = resultSet.getString("title");
 				int duration = resultSet.getInt("duration");
-				MusicTracks track = new MusicTracks(title, duration);
+				String strDuration = MusicTracks.formatDuration(duration);
+				MusicTracks track = new MusicTracks(title, strDuration);
 				tracks.add(track);
 			}
 			resultSet.close();
