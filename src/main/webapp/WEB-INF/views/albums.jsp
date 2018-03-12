@@ -13,9 +13,6 @@
 		<jsp:attribute name="footer">
 	   	</jsp:attribute>
 		<jsp:body>
-			<p>
-				<a href="<spring:url value="/albums/"/>">See a list of all our albums!</a>
-			</p>
 			<br />
 			<br />
 			<table class="musicList sortable">
@@ -33,7 +30,7 @@
 						<td><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
 						<td><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
 						<td>${album.num_tracks}</td>
-						<td>${album.price}</td>
+						<td>£${album.price}</td>
 						<td><button>Add</button></td>
 					</tr>
 				</c:forEach>

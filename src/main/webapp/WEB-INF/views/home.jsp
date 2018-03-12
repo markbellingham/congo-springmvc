@@ -14,7 +14,8 @@
 		<jsp:attribute name="footer">
 	   	</jsp:attribute>
 		<jsp:body>
-			<p><a href="<spring:url value="/albums/"/>">See a list of all our albums!</a></p>		
+		    <br/><br/>
+			<center><p><a href="<spring:url value="/albums/"/>">See a list of all our albums!</a></p></center>		
 		</jsp:body>
 	</t:genericpage>
 </html>

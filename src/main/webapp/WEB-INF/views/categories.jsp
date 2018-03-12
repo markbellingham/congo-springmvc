@@ -15,6 +15,7 @@
 		<jsp:body>
 		<br/>
 		<br/>
+		<div class="selector">
 		<form action="<spring:url value="/categories"/>" method="get">
 			<select name="category" onchange="this.form.submit()">
 				<option>Select Category</option>
@@ -23,6 +24,7 @@
 				</c:forEach>
 			</select>
 		</form>
+		</div> <!-- ends selector -->
 		<br />
 		<br />
 		<table class="musicList sortable">

@@ -15,10 +15,12 @@
 		<jsp:body>
 		<br/>
 		<br/>
+		<div class="selector">
 		<form action="<spring:url value="/artist-finder"/>" method="post">
 			<input type="text" name="name" placeholder="Artist Name">
 			<button type="submit" name="search">Search</button>
 		</form>
+		</div> <!-- ends selector -->
 		<br />
 		<br />
 		<table class="musicList sortable">

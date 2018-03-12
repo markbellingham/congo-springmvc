@@ -15,6 +15,7 @@
 		<jsp:body>
 		<br/>
 		<br/>
+		<div class="selector">
 		<form action="<spring:url value="/price-picker"/>" method="get">
 			<select name="price" onchange="this.form.submit()">
 				<option>Select Price</option>
@@ -24,6 +25,7 @@
 				<option value="16">$14 < £16</option>				
 			</select>
 		</form>
+		</div> <!-- ends selector -->
 		<br />
 		<br />
 		<table class="musicList sortable">
