@@ -6,6 +6,7 @@
 <%@attribute name="footer" fragment="true" %>
 <head>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sorttable.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/congo.js"></script>
     <link href="${pageContext.request.contextPath}/resources/css/congo.css" rel="stylesheet" />
 <!-- 
     <spring:url value="/resources/js/sorttable.js" var="sorttableScript"/>
