@@ -18,21 +18,28 @@
 			</p>
 			<br />
 			<br />
-			<h2>${album.title} by ${album.artistName}</h2>
-			<table class="musicList sortable">
-				<tr>
-				    <th>Track #</th>
-					<th>Title</th>
-					<th>Duration</th>
-				</tr>
-				<c:forEach items="${tracks}" var="track">
-					<tr>
-					   <td>${track.trackNumber}</td>
-					   <td>${track.title}</td>
-					   <td>${track.strDuration}</td>
-					</tr>
-				</c:forEach>
-			</table>
+			<div id="album-container">
+				<h2>${album.title} by ${album.artistName}</h2>
+				<div id="album-cover">
+				   <img src="${pageContext.request.contextPath}/resources/images/covers/${album.imageName}"/>
+				</div> <!-- ends album-cover -->
+				<div id="album-tracks">
+					<table class="musicList sortable" id="trackLister">
+						<tr>
+						    <th>Track #</th>
+							<th>Title</th>
+							<th>Duration</th>
+						</tr>
+						<c:forEach items="${tracks}" var="track">
+							<tr>
+							   <td>${track.trackNumber}</td>
+							   <td>${track.title}</td>
+							   <td>${track.strDuration}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div> <!-- ends album-tracks -->
+			</div> <!-- ends album-container -->
 		</jsp:body>
 	</t:genericpage>
 </html>
