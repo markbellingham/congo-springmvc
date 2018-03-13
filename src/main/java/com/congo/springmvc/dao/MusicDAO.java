@@ -144,6 +144,7 @@ public class MusicDAO {
 	
 	public ArrayList<MusicTracks> findAlbumTracks(int recordingId) {
 		ArrayList<MusicTracks> tracks = new ArrayList<MusicTracks>();
+		int trackNumber = 1;
 		try {
 			conn = new DBConnection().openConnection();
 			statement = conn.prepareStatement(FIND_ALBUM_TRACKS);
@@ -153,8 +154,9 @@ public class MusicDAO {
 				String title = resultSet.getString("title");
 				int duration = resultSet.getInt("duration");
 				String strDuration = MusicTracks.formatDuration(duration);
-				MusicTracks track = new MusicTracks(title, strDuration);
+				MusicTracks track = new MusicTracks(trackNumber, title, strDuration);
 				tracks.add(track);
+				trackNumber++;
 			}
 			resultSet.close();
 			statement.close();

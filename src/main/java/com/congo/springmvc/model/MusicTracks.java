@@ -4,20 +4,14 @@ public class MusicTracks {
 	
 	private int id;
 	private int recordingId;
+	private int trackNumber;
 	private String title;
 	private int duration;
 	private String strDuration;
 	
-	public MusicTracks(int id, int recordingId, String title, int duration) {
+	public MusicTracks(int trackNumber, String title, String strDuration) {
 		super();
-		this.id = id;
-		this.recordingId = recordingId;
-		this.title = title;
-		this.duration = duration;
-	}
-	
-	public MusicTracks(String title, String strDuration) {
-		super();
+		this.trackNumber = trackNumber;
 		this.title = title;
 		this.strDuration = strDuration;
 	}
@@ -28,8 +22,8 @@ public class MusicTracks {
 
 	@Override
 	public String toString() {
-		return "MusicTracks [id=" + id + ", recordingId=" + recordingId + ", title=" + title + ", duration=" + duration
-				+ "]";
+		return "MusicTracks [id=" + id + ", recordingId=" + recordingId + ", trackNumber=" + trackNumber + ", title="
+				+ title + ", duration=" + duration + ", strDuration=" + strDuration + "]";
 	}
 
 	public int getId() {
@@ -63,9 +57,15 @@ public class MusicTracks {
 	public String getStrDuration() {
 		return strDuration;
 	}
-
 	public void setStrDuration(String strDuration) {
 		this.strDuration = strDuration;
+	}
+	
+	public int getTrackNumber() {
+		return trackNumber;
+	}
+	public void setTrackNumber(int trackNumber) {
+		this.trackNumber = trackNumber;
 	}
 	
 	public static String formatDuration(int duration) {

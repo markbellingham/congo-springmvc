@@ -20,14 +20,16 @@
 			<br />
 			<h2>${album.title} by ${album.artistName}</h2>
 			<table class="musicList sortable">
-				<tr>	
+				<tr>
+				    <th>Track #</th>
 					<th>Title</th>
 					<th>Duration</th>
 				</tr>
 				<c:forEach items="${tracks}" var="track">
 					<tr>
-						<td>${track.title}</td>
-						<td>${track.strDuration}</td>
+					   <td>${track.trackNumber}</td>
+					   <td>${track.title}</td>
+					   <td>${track.strDuration}</td>
 					</tr>
 				</c:forEach>
 			</table>
