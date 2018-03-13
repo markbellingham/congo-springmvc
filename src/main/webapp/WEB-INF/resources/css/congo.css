@@ -32,7 +32,7 @@
   }
   #logo { margin-left: 5px; }
 }
-@media (min-width: 0px) and (max-width 820px) {
+@media (min-width: 0px) and (max-width: 820px) {
 	#logo { 
 	   float: left;
 	   margin-left: auto;
