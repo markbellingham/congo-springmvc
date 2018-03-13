@@ -16,7 +16,8 @@
 			<br />
 			<br />
 			<table class="musicList sortable">
-				<tr>	
+				<tr>
+				    <th></th>
 					<th>Artist</th>
 					<th>Album</th>
 					<th>Category</th>
@@ -26,12 +27,14 @@
 				</tr>
 				<c:forEach items="${albums}" var="album">
 					<tr>
-						<td><a href="<spring:url value="/artist/${album.artistName}"/>">${album.artistName}</a></td>
-						<td><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
-						<td><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
-						<td>${album.num_tracks}</td>
-						<td>£${album.price}</td>
-						<td><button>Add</button></td>
+					   <td><a href="<spring:url value="/albums/${album.recordingId}"/>">
+					       <img src="${pageContext.request.contextPath}/resources/images/covers/sm/${album.imageName}"/></a></td>
+					   <td><a href="<spring:url value="/artist/${album.artistName}"/>">${album.artistName}</a></td>
+					   <td><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
+					   <td><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
+					   <td>${album.num_tracks}</td>
+					   <td>£${album.price}</td>
+					   <td><button>Add</button></td>
 					</tr>
 				</c:forEach>
 			</table>
