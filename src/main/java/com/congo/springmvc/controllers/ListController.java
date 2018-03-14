@@ -1,8 +1,10 @@
 package com.congo.springmvc.controllers;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,10 +86,18 @@ public class ListController {
 		return "artist-finder";
 	}
 	
-	@RequestMapping(value="/add-to-order", method=RequestMethod.POST)
-	public String addToOrder(Model model, HttpServletRequest request) {
-		
-		
+	@RequestMapping(value="/add-to-order/{recordingId}")
+	public String addToOrder(HttpServletRequest request, @PathVariable("recordingId") int recordingId, HttpSession session)  {
+		ArrayList<Integer> albumArray;
+		session = request.getSession();
+		if(session.getAttribute("myOrder") != null) {
+			albumArray = (ArrayList<Integer>) session.getAttribute("myOrder");
+		} else {
+			albumArray = new ArrayList<Integer>();
+		}
+		albumArray.add(recordingId);
+		session.setAttribute("myOrder", albumArray);
+		System.out.println(session.getAttribute("myOrder"));
 		return getPreviousPageByRequest(request).orElse("/"); //else go to home page
 	}
 	
