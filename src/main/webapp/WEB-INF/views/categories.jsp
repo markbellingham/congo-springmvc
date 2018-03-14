@@ -40,6 +40,7 @@
 					<td><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
 					<td>${album.num_tracks}</td>
 					<td>£${album.price}</td>
+					<form action="<spring:url value="/add-to-order"/>" method="post">
 				    <c:choose>
                         <c:when test="${album.stockCount > '0'}">
                             <td><button>Add</button></td>
@@ -48,6 +49,7 @@
                             <td><button disabled>Add</button></td>
                         </c:otherwise>
                     </c:choose>
+                    </form>
 				</tr>
 			</c:forEach>
 		</table>

@@ -1,5 +1,9 @@
 package com.congo.springmvc.controllers;
 
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,6 +82,25 @@ public class ListController {
 		name = name.toLowerCase();
 		model.addAttribute("albums", this.mdao.findRecordingsByArtist(name));
 		return "artist-finder";
+	}
+	
+	@RequestMapping(value="/add-to-order", method=RequestMethod.POST)
+	public String addToOrder(Model model, HttpServletRequest request) {
+		
+		
+		return getPreviousPageByRequest(request).orElse("/"); //else go to home page
+	}
+	
+	/**
+	* Returns the viewName to return for coming back to the sender url
+	*
+	* @param request Instance of {@link HttpServletRequest} or use an injected instance
+	* @return Optional with the view name. Recomended to use an alternativa url with
+	* {@link Optional#orElse(java.lang.Object)}
+	*/
+	protected Optional<String> getPreviousPageByRequest(HttpServletRequest request)
+	{
+	   return Optional.ofNullable(request.getHeader("Referer")).map(requestUrl -> "redirect:" + requestUrl);
 	}
 
 }
