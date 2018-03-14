@@ -29,7 +29,7 @@
 		<br />
 		<table class="musicList sortable" id="resultTable">
 			<tr>
-				<th></th><th>Artist</th><th>Album</th><th>Category</th><th>Number of Tracks</th><th>Price</th><th></th>
+				<th class="sorttable_nosort"></th><th>Artist</th><th>Album</th><th>Category</th><th>Number of Tracks</th><th>Price</th><th class="sorttable_nosort"></th>
 			</tr>
 			<c:forEach items="${albums}" var="album">
 				<tr>
