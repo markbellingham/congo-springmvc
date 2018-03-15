@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.congo.springmvc.dao.MusicDAO;
+import com.congo.springmvc.model.MusicRecordings;
 
 @Controller
 public class ListController {
 	
 	@Autowired
 	private MusicDAO mdao = MusicDAO.getInstance();
+	
+	ArrayList<Integer> orderArray = new ArrayList<Integer>();
 	
 	@RequestMapping(value="/albums")
 	public String listAlbums(Model model) {
@@ -88,17 +91,33 @@ public class ListController {
 	
 	@RequestMapping(value="/add-to-order/{recordingId}")
 	public String addToOrder(HttpServletRequest request, @PathVariable("recordingId") int recordingId, HttpSession session)  {
-		ArrayList<Integer> albumArray;
 		session = request.getSession();
 		if(session.getAttribute("myOrder") != null) {
-			albumArray = (ArrayList<Integer>) session.getAttribute("myOrder");
+			orderArray = (ArrayList<Integer>) session.getAttribute("myOrder");
 		} else {
-			albumArray = new ArrayList<Integer>();
+			orderArray = new ArrayList<Integer>();
 		}
-		albumArray.add(recordingId);
-		session.setAttribute("myOrder", albumArray);
+		orderArray.add(recordingId);
+		session.setAttribute("myOrder", orderArray);
 		System.out.println(session.getAttribute("myOrder"));
 		return getPreviousPageByRequest(request).orElse("/"); //else go to home page
+	}
+	
+	@RequestMapping(value="/show-order")
+	public String showOrder(Model model, HttpServletRequest request, HttpSession session) {
+		ArrayList<MusicRecordings> albumArray = new ArrayList<MusicRecordings>();
+		session = request.getSession();
+		if (session.getAttribute("myOrder") != null) {
+			orderArray = (ArrayList<Integer>) session.getAttribute("myOrder");
+			for (int recordingId : orderArray) {
+				System.out.println(recordingId);
+				MusicRecordings album = this.mdao.findAlbumById(recordingId);
+				albumArray.add(album);
+			}
+			System.out.println(albumArray);
+			model.addAttribute("order", albumArray);
+		}
+		return "show-order";
 	}
 	
 	/**
