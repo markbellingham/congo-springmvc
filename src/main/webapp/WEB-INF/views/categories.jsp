@@ -33,20 +33,20 @@
 			</tr>
 			<c:forEach items="${albums}" var="album">
 				<tr>
-				    <td><a href="<spring:url value="/albums/${album.recordingId}"/>">
+				    <td class="center"><a href="<spring:url value="/albums/${album.recordingId}"/>">
                            <img src="${pageContext.request.contextPath}/resources/images/covers/sm/${album.imageName}"/></a></td>
-					<td><a href="<spring:url value="/artist/${album.artistName}"/>">${album.artistName}</a></td>
-					<td><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
-					<td><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
-					<td>${album.num_tracks}</td>
-					<td>£${album.price}</td>
+					<tdclass="left"><a href="<spring:url value="/artist/${album.artistName}"/>">${album.artistName}</a></td>
+					<td class="left"><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
+					<td class="left"><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
+					<td class="center">${album.num_tracks}</td>
+					<td class="right">£${album.price}</td>
 					<form action="<spring:url value="/add-to-order/${album.recordingId}"/>" method="post">
 				    <c:choose>
                         <c:when test="${album.stockCount > '0'}">
-                            <td><button>Add</button></td>
+                            <td class="center"><button>Add</button></td>
                         </c:when>
                         <c:otherwise>
-                            <td><button disabled>Add</button></td>
+                            <td class="center"><button disabled>Add</button></td>
                         </c:otherwise>
                     </c:choose>
                     </form>

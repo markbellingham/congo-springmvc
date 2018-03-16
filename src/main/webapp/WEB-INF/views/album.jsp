@@ -34,7 +34,7 @@
 							<tr>
 							   <td>${track.trackNumber}</td>
 							   <td>${track.title}</td>
-							   <td>${track.strDuration}</td>
+							   <td class="right">${track.strDuration}</td>
 							</tr>
 						</c:forEach>
 					</table>

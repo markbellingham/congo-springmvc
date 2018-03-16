@@ -22,17 +22,17 @@
 			</tr>
 			<c:forEach items="${order}" var="album">
 			<tr>
-				<td><a href="<spring:url value="/albums/${album.recordingId}"/>">
+				<td class="center"><a href="<spring:url value="/albums/${album.recordingId}"/>">
 				    <img src="${pageContext.request.contextPath}/resources/images/covers/sm/${album.imageName}"/></a></td>
-				<td><a href="<spring:url value="/artist/${album.artistName}"/>">${album.artistName}</a></td>
-				<td><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
-				<td><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
-				<td>${album.num_tracks}</td>
-				<td>£${album.price}</td>
-				<td><input type="number" min="1" max="99" style="width: 3.5em;"></td>
-				<td>£</td>
-				<td><input type="submit" value="Update"></td>
-				<td><input type="submit" value="Delete"></td>
+				<td class="left"><a href="<spring:url value="/artist/${album.artistName}"/>">${album.artistName}</a></td>
+				<td class="left"><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
+				<td class="left"><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
+				<td class="center">${album.num_tracks}</td>
+				<td class="right">£${album.price}</td>
+				<td class="center"><input type="number" min="1" max="99" style="width: 3.5em;"></td>
+				<td class="right">£</td>
+				<td class="center"><input type="submit" value="Update"></td>
+				<td class="center"><input type="submit" value="Delete"></td>
 			</tr>
 			</c:forEach>
 		</table>
