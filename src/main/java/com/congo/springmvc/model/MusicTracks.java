@@ -71,7 +71,7 @@ public class MusicTracks {
 	public static String formatDuration(int duration) {
 		int minutes = duration / 60;
 		int seconds = duration % 60;
-		String formattedDuration = minutes + "m" + seconds + "s";
+		String formattedDuration = minutes + "m" + String.format("%02d", seconds) + "s";
 		return formattedDuration;
 	}
 

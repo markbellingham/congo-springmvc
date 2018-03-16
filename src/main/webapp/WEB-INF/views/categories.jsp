@@ -29,13 +29,13 @@
 		<br />
 		<table class="musicList sortable" id="resultTable">
 			<tr>
-				<th class="sorttable_nosort"></th><th>Artist</th><th>Album</th><th>Category</th><th>Number of Tracks</th><th>Price</th><th class="sorttable_nosort"></th>
+				<th class="sorttable_nosort"></th><th>Artist</th><th>Album</th><th>Category</th><th># of Tracks</th><th>Price</th><th class="sorttable_nosort"></th>
 			</tr>
 			<c:forEach items="${albums}" var="album">
 				<tr>
 				    <td class="center"><a href="<spring:url value="/albums/${album.recordingId}"/>">
                            <img src="${pageContext.request.contextPath}/resources/images/covers/sm/${album.imageName}"/></a></td>
-					<tdclass="left"><a href="<spring:url value="/artist/${album.artistName}"/>">${album.artistName}</a></td>
+					<td class="left"><a href="<spring:url value="/artist/${album.artistName}"/>">${album.artistName}</a></td>
 					<td class="left"><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
 					<td class="left"><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
 					<td class="center">${album.num_tracks}</td>
