@@ -206,6 +206,8 @@ public class MusicDAO {
 			System.out.println("recordingId = " + recordingId);
 			MusicRecordings album = findAlbumById(recordingId);
 			album.setQuantity(quantity);
+			float totalPrice = album.getPrice() * quantity;
+			album.setTotalPrice(totalPrice);
 			albums.add(album);
 		}
 		return albums;

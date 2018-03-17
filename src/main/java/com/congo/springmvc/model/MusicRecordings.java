@@ -12,6 +12,7 @@ public class MusicRecordings {
 	private int stockCount;
 	
 	private int quantity;
+	private float totalPrice;
 	
 	public MusicRecordings(int recordingId, String artistName, String title, String category, String imageName,
 			int num_tracks, float price, int stockCount) {
@@ -27,7 +28,7 @@ public class MusicRecordings {
 	}
 	
 	public MusicRecordings(int recordingId, String artistName, String title, String category, String imageName,
-			int num_tracks, float price, int stockCount, int quantity) {
+			int num_tracks, float price, int stockCount, int quantity, float totalPrice) {
 		super();
 		this.recordingId = recordingId;
 		this.artistName = artistName;
@@ -38,6 +39,7 @@ public class MusicRecordings {
 		this.price = price;
 		this.stockCount = stockCount;
 		this.quantity = quantity;
+		this.totalPrice = totalPrice;
 	}
 
 	public MusicRecordings() {
@@ -48,7 +50,8 @@ public class MusicRecordings {
 	public String toString() {
 		return "MusicRecordings [recordingId=" + recordingId + ", artistName=" + artistName + ", title=" + title
 				+ ", category=" + category + ", imageName=" + imageName + ", num_tracks=" + num_tracks + ", price="
-				+ price + ", stockCount=" + stockCount + ", quantity=" + quantity + "]";
+				+ price + ", stockCount=" + stockCount + ", quantity=" + quantity + ", totalPrice=" + totalPrice
+				+ "]";
 	}
 
 	public int getRecordingId() { return recordingId; }
@@ -78,5 +81,7 @@ public class MusicRecordings {
 
 	public int getQuantity() {return quantity; }
 	public void setQuantity(int quantity) { this.quantity = quantity; }
-	
+
+	public float getTotalPrice() { return totalPrice;	}
+	public void setTotalPrice(float totalPrice) { this.totalPrice = totalPrice; }
 }

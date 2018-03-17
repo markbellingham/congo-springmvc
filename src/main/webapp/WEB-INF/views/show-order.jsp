@@ -30,7 +30,7 @@
 				<td class="center">${album.num_tracks}</td>
 				<td class="right">£${album.price}</td>
 				<td class="center"><input type="number" value="${album.quantity}" min="1" max="99" style="width: 3.5em;"></td>
-				<td class="right">£</td>
+				<td class="right">£${album.totalPrice}</td>
 				<td class="center"><input type="submit" value="Update"></td>
 				<td class="center"><input type="submit" value="Delete"></td>
 			</tr>
