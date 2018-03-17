@@ -105,17 +105,13 @@ public class ListController {
 	
 	@RequestMapping(value="/show-order")
 	public String showOrder(Model model, HttpServletRequest request, HttpSession session) {
-		ArrayList<MusicRecordings> albumArray = new ArrayList<MusicRecordings>();
+		ArrayList<MusicRecordings> albumsInOrder = new ArrayList<MusicRecordings>();
 		session = request.getSession();
 		if (session.getAttribute("myOrder") != null) {
 			orderArray = (ArrayList<Integer>) session.getAttribute("myOrder");
-			for (int recordingId : orderArray) {
-				System.out.println(recordingId);
-				MusicRecordings album = this.mdao.findAlbumById(recordingId);
-				albumArray.add(album);
-			}
-			System.out.println(albumArray);
-			model.addAttribute("order", albumArray);
+			albumsInOrder = mdao.findAlbumsInOrder(orderArray);
+			System.out.println("albumArray = " + albumsInOrder);
+			model.addAttribute("order", albumsInOrder);
 		}
 		return "show-order";
 	}

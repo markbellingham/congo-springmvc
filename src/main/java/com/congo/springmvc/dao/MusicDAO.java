@@ -194,6 +194,16 @@ public class MusicDAO {
 		return album;
 	}
 	
+	public ArrayList<MusicRecordings> findAlbumsInOrder(ArrayList<Integer> order) {
+		albums = new ArrayList<MusicRecordings>();
+		for (int recordingId : order) {
+			System.out.println("recordingId = " + recordingId);
+			MusicRecordings album = findAlbumById(recordingId);
+			albums.add(album);
+		}
+		return albums;
+	}
+	
 	/**
 	 * Singleton Design Pattern
 	 * means that only one instance of this DAO can exist at a time, eliminating 
