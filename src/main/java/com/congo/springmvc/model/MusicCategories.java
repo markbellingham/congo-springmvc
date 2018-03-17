@@ -5,9 +5,8 @@ public class MusicCategories {
 	private int id;
 	private String name;
 	
-	public MusicCategories(int id, String name) {
+	public MusicCategories(String name) {
 		super();
-		this.id = id;
 		this.name = name;
 	}
 

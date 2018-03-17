@@ -50,9 +50,8 @@ public class MusicDAO {
 			statement = conn.prepareStatement(FIND_ALL_CATEGORIES);
 			resultSet = statement.executeQuery();
 			while(resultSet.next()) {
-				int id = resultSet.getInt("id");
 				String name = resultSet.getString("name");
-				MusicCategories category = new MusicCategories(id, name);
+				MusicCategories category = new MusicCategories(name);
 				categories.add(category);
 			}
 			resultSet.close();
