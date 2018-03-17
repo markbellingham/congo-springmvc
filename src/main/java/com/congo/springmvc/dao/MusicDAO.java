@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.congo.springmvc.model.MusicCategories;
 import com.congo.springmvc.model.MusicRecordings;
@@ -196,9 +199,13 @@ public class MusicDAO {
 	
 	public ArrayList<MusicRecordings> findAlbumsInOrder(ArrayList<Integer> order) {
 		albums = new ArrayList<MusicRecordings>();
-		for (int recordingId : order) {
+		Set<Integer> orderSet = new HashSet<Integer>(order);
+		for (int recordingId : orderSet) {
+			int quantity = Collections.frequency(order, recordingId);
+			System.out.println(recordingId + " quantity = " + quantity);
 			System.out.println("recordingId = " + recordingId);
 			MusicRecordings album = findAlbumById(recordingId);
+			album.setQuantity(quantity);
 			albums.add(album);
 		}
 		return albums;
