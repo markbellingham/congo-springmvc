@@ -132,6 +132,20 @@ public class ListController {
 		return "show-order";
 	}
 	
+	@RequestMapping(value="/delete-from-order/{recordingId}",method=RequestMethod.POST)
+	public String deleteFromOrder(Model model, HttpServletRequest request, HttpSession session, @PathVariable("recordingId") int recordingId) {
+		ArrayList<MusicRecordings> albumsInOrder = new ArrayList<MusicRecordings>();
+		session = request.getSession();
+		if(session.getAttribute("myOrder") != null) {
+			orderArray = (ArrayList<Integer>) session.getAttribute("myOrder");
+			orderArray.removeAll(Collections.singleton(recordingId));
+			session.setAttribute("myOrder", orderArray);
+			albumsInOrder = mdao.findAlbumsInOrder(orderArray);
+			model.addAttribute("order", albumsInOrder);
+		}
+		return "show-order";
+	}
+	
 	/**
 	* Returns the viewName to return for coming back to the sender url
 	*

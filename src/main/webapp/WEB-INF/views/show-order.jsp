@@ -36,7 +36,11 @@
 					</form>
 				</td>
 				<td class="right">£${album.totalPrice}</td>
-				<td class="center"><input type="submit" value="Delete"></td>
+				<td class="center">
+					<form action="<spring:url value="/delete-from-order/${album.recordingId}"/>" method="post">
+						<input type="submit" value="Delete">
+					</form>
+				</td>
 			</tr>
 			</c:forEach>
 		</table>
