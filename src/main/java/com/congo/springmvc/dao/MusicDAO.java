@@ -202,8 +202,6 @@ public class MusicDAO {
 		Set<Integer> orderSet = new HashSet<Integer>(order);
 		for (int recordingId : orderSet) {
 			int quantity = Collections.frequency(order, recordingId);
-			System.out.println(recordingId + " quantity = " + quantity);
-			System.out.println("recordingId = " + recordingId);
 			MusicRecordings album = findAlbumById(recordingId);
 			album.setQuantity(quantity);
 			float totalPrice = album.getPrice() * quantity;

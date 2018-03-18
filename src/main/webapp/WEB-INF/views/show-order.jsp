@@ -24,14 +24,18 @@
 			<tr>
 				<td class="center"><a href="<spring:url value="${album.recordingId}"/>">
 				    <img src="${pageContext.request.contextPath}/resources/images/covers/sm/${album.imageName}"/></a></td>
-				<td class="left"><a href="<spring:url value="${album.artistName}"/>">${album.artistName}</a></td>
-				<td class="left"><a href="<spring:url value="${album.recordingId}"/>">${album.title}</a></td>
-				<td class="left"><a href="<spring:url value="${album.category}"/>">${album.category}</a></td>
+				<td class="left"><a href="<spring:url value="/artist/${album.artistName}"/>">${album.artistName}</a></td>
+				<td class="left"><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
+				<td class="left"><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
 				<td class="center">${album.num_tracks}</td>
 				<td class="right">£${album.price}</td>
-				<td class="center"><input type="number" value="${album.quantity}" min="1" max="99" style="width: 3.5em;"></td>
+				<td class="center">
+					<form action="<spring:url value="/update-order/${album.recordingId}"/>" method="post">
+						<input name="quantity" type="number" value="${album.quantity}" min="1" max="99" style="width: 3.5em;">
+						<input type="submit" value="Update">
+					</form>
+				</td>
 				<td class="right">£${album.totalPrice}</td>
-				<td class="center"><input type="submit" value="Update"></td>
 				<td class="center"><input type="submit" value="Delete"></td>
 			</tr>
 			</c:forEach>

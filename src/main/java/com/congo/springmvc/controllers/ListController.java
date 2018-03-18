@@ -1,6 +1,7 @@
 package com.congo.springmvc.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,7 +47,6 @@ public class ListController {
 	
 	@RequestMapping(value="/categories/{category}")
 	public String listAlbumsByCategory(Model model, @PathVariable("category") String category) {
-//		category = category.toLowerCase();
 		model.addAttribute("categories", this.mdao.findAllCategories());
 		model.addAttribute("albums", this.mdao.findRecordingsByCategory(category));
 		return "categories";
@@ -99,7 +99,6 @@ public class ListController {
 		}
 		orderArray.add(recordingId);
 		session.setAttribute("myOrder", orderArray);
-		System.out.println(session.getAttribute("myOrder"));
 		return getPreviousPageByRequest(request).orElse("/"); //else go to home page
 	}
 	
@@ -110,7 +109,24 @@ public class ListController {
 		if (session.getAttribute("myOrder") != null) {
 			orderArray = (ArrayList<Integer>) session.getAttribute("myOrder");
 			albumsInOrder = mdao.findAlbumsInOrder(orderArray);
-			System.out.println("albumArray = " + albumsInOrder);
+			model.addAttribute("order", albumsInOrder);
+		}
+		return "show-order";
+	}
+	
+	@RequestMapping(value="/update-order/{recordingId}",method=RequestMethod.POST,params={"quantity"})
+	public String updateOrder(Model model, HttpServletRequest request, HttpSession session, 
+			@PathVariable("recordingId") int recordingId, int quantity) {
+		ArrayList<MusicRecordings> albumsInOrder = new ArrayList<MusicRecordings>();
+		session = request.getSession();
+		if (session.getAttribute("myOrder") != null) {
+			orderArray = (ArrayList<Integer>) session.getAttribute("myOrder");
+			orderArray.removeAll(Collections.singleton(recordingId));
+			for(int i = 1; i <= quantity; i++) {
+				orderArray.add(recordingId);
+			}
+			session.setAttribute("myOrder", orderArray);
+			albumsInOrder = mdao.findAlbumsInOrder(orderArray);
 			model.addAttribute("order", albumsInOrder);
 		}
 		return "show-order";
