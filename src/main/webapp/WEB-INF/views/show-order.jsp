@@ -43,6 +43,7 @@
 				</td>
 			</tr>
 			</c:forEach>
+			<tr><td id="grandTotal" colspan="7">Grand Total:</td><td class="right">£${grandTotal}</td></tr>
 		</table>
 		</jsp:body>
 	</t:genericpage>

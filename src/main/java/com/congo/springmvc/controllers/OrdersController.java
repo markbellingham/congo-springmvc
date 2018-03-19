@@ -46,7 +46,9 @@ public class OrdersController {
 		if (session.getAttribute("myOrder") != null) {
 			orderArray = (ArrayList<Integer>) session.getAttribute("myOrder");
 			albumsInOrder = mdao.findAlbumsInOrder(orderArray);
+			float grandTotal = calculateGrandTotal(albumsInOrder);
 			model.addAttribute("order", albumsInOrder);
+			model.addAttribute("grandTotal", grandTotal);
 		}
 		return "show-order";
 	}
@@ -64,7 +66,9 @@ public class OrdersController {
 			}
 			session.setAttribute("myOrder", orderArray);
 			albumsInOrder = mdao.findAlbumsInOrder(orderArray);
+			float grandTotal = calculateGrandTotal(albumsInOrder);
 			model.addAttribute("order", albumsInOrder);
+			model.addAttribute("grandTotal", grandTotal);
 		}
 		return "show-order";
 	}
@@ -78,7 +82,9 @@ public class OrdersController {
 			orderArray.removeAll(Collections.singleton(recordingId));
 			session.setAttribute("myOrder", orderArray);
 			albumsInOrder = mdao.findAlbumsInOrder(orderArray);
+			float grandTotal = calculateGrandTotal(albumsInOrder);
 			model.addAttribute("order", albumsInOrder);
+			model.addAttribute("grandTotal", grandTotal);
 		}
 		return "show-order";
 	}
@@ -93,6 +99,14 @@ public class OrdersController {
 	protected Optional<String> getPreviousPageByRequest(HttpServletRequest request)
 	{
 	   return Optional.ofNullable(request.getHeader("Referer")).map(requestUrl -> "redirect:" + requestUrl);
+	}
+	
+	protected float calculateGrandTotal(ArrayList<MusicRecordings> albumsInOrder) {
+		float grandTotal = 0;
+		for(MusicRecordings albums : albumsInOrder) {
+			grandTotal += albums.getTotalPrice();
+		}
+		return grandTotal;
 	}
 	
 }
