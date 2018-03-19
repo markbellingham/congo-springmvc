@@ -30,14 +30,14 @@
 				<td class="center">${album.num_tracks}</td>
 				<td class="right">£${album.price}</td>
 				<td class="center">
-					<form action="<spring:url value="/update-order/${album.recordingId}"/>" method="post">
+					<form action="<spring:url value="/order/update-order/${album.recordingId}"/>" method="post">
 						<input name="quantity" type="number" value="${album.quantity}" min="1" max="99" style="width: 3.5em;">
 						<input type="submit" value="Update">
 					</form>
 				</td>
 				<td class="right">£${album.totalPrice}</td>
 				<td class="center">
-					<form action="<spring:url value="/delete-from-order/${album.recordingId}"/>" method="post">
+					<form action="<spring:url value="/order/delete-from-order/${album.recordingId}"/>" method="post">
 						<input type="submit" value="Delete">
 					</form>
 				</td>

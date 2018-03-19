@@ -19,7 +19,7 @@
 			<a href="<spring:url value="/categories/"/>">Categories</a> | 
 			<a href="<spring:url value="/price-picker/"/>">Price Picker</a> | 
 			<a href="<spring:url value="/artist-finder/"/>">Artist Finder</a> | 
-			<a href="<spring:url value="/show-order/"/>">Show Order</a> | 
+			<a href="<spring:url value="/order/basket/"/>">Show Order</a> | 
 			<a href="<spring:url value="/show-all-my-orders/"/>">Show All My Orders</a> | 
 			<a href="<spring:url value="/login-register/"/>">Log in/Register</a>
 		</nav>

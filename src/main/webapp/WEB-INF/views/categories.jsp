@@ -40,7 +40,7 @@
 					<td class="left"><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
 					<td class="center">${album.num_tracks}</td>
 					<td class="right">£${album.price}</td>
-					<form action="<spring:url value="/add-to-order/${album.recordingId}"/>" method="post">
+					<form action="<spring:url value="/order/add-to-order/${album.recordingId}"/>" method="post">
 				    <c:choose>
                         <c:when test="${album.stockCount > '0'}">
                             <td class="center"><button>Add</button></td>
