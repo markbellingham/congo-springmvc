@@ -14,7 +14,7 @@
 		<jsp:attribute name="footer">
 	   	</jsp:attribute>
 		<jsp:body>
-			<div>${msg}</div>
+			<div>Welcome ${customer.fname} ${customer.lname}</div>
 		</jsp:body>
 	</t:genericpage>
 </html>

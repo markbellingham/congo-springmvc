@@ -1,5 +1,8 @@
 package com.congo.springmvc.controllers;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +16,7 @@ import com.congo.springmvc.model.CongoCustomers;
 @RequestMapping("/customer")
 public class CustomerController {
 	
+	@Autowired
 	private CustomersDAO cdao = CustomersDAO.getInstance();
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
@@ -22,11 +26,12 @@ public class CustomerController {
 	}
 	
     @RequestMapping(value="/login",method = RequestMethod.POST, params={"email","password"})
-    public String submit(Model model, @ModelAttribute("CongoCustomers") CongoCustomers customer, String email, String password) {
+    public String submit(Model model, HttpSession session, @ModelAttribute("CongoCustomers") CongoCustomers customer, String email, String password) {
     	customer = cdao.findCustomerByEmail(email);
         if (customer != null && customer.getEmail() != null & customer.getPassword() != null) {
             if (customer.getEmail().equals(email) && customer.getPassword().equals(password)) {            	
-                model.addAttribute("msg", "Welcome" + customer.getFname() + " " + customer.getLname());
+                model.addAttribute("customer", customer);
+                session.setAttribute("customer", customer);
                 return "logged-in";
             } else {
                 model.addAttribute("error", "Invalid Details");

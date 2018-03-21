@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.congo.springmvc.model.CongoCustomers;
-import com.congo.springmvc.model.MusicRecordings;
 
 public class CustomersDAO {
 	
