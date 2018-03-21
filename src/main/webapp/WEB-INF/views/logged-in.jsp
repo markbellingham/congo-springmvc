@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <html>
 <head>
-	<title>Home | Congo</title>
+	<title>Welcome | Congo</title>
 </head>
 	<t:genericpage>
 		<jsp:attribute name="header">
@@ -12,8 +14,7 @@
 		<jsp:attribute name="footer">
 	   	</jsp:attribute>
 		<jsp:body>
-		    <br/><br/>
-			<center><p><a href="<spring:url value="/albums/"/>">See a list of all our albums!</a></p></center>		
+			<div>${msg}</div>
 		</jsp:body>
 	</t:genericpage>
 </html>

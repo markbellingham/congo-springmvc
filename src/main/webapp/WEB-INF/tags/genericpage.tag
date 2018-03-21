@@ -6,8 +6,6 @@
 <%@attribute name="footer" fragment="true" %>
 <head>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sorttable.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/congo.js"></script>
     <link href="${pageContext.request.contextPath}/resources/css/congo.css" rel="stylesheet" />
 </head>
 <div id="wrapper">
@@ -21,7 +19,7 @@
 			<a href="<spring:url value="/artist-finder/"/>">Artist Finder</a> | 
 			<a href="<spring:url value="/order/basket/"/>">Show Order</a> | 
 			<a href="<spring:url value="/show-all-my-orders/"/>">Show All My Orders</a> | 
-			<a href="<spring:url value="/login-register/"/>">Log in/Register</a>
+			<a href="<spring:url value="/customer/login/"/>">Log in/Register</a>
 		</nav>
 	   	<jsp:invoke fragment="header"/>
 	</div> <!-- ends pageheader -->

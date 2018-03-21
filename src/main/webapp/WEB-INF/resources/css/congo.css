@@ -140,3 +140,9 @@ a.th {
 	text-decoration: none;
 	color: #ffffff;
 }
+
+#grandTotal {
+	text-align: right;
+	font-weight: bold;
+	border: none;
+}
