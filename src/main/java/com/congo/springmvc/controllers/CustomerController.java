@@ -6,11 +6,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.congo.springmvc.dao.CustomersDAO;
 import com.congo.springmvc.model.CongoCustomers;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
+	
+	private CustomersDAO cdao = CustomersDAO.getInstance();
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String login(Model model) {
@@ -20,8 +23,9 @@ public class CustomerController {
 	
     @RequestMapping(value="/login",method = RequestMethod.POST, params={"email","password"})
     public String submit(Model model, @ModelAttribute("CongoCustomers") CongoCustomers customer, String email, String password) {
+    	customer = cdao.findCustomerByEmail(email);
         if (customer != null && customer.getEmail() != null & customer.getPassword() != null) {
-            if (customer.getEmail().equals(email) && customer.getPassword().equals(password)) {
+            if (customer.getEmail().equals(email) && customer.getPassword().equals(password)) {            	
                 model.addAttribute("msg", "Welcome" + customer.getFname() + " " + customer.getLname());
                 return "logged-in";
             } else {
