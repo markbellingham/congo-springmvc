@@ -17,8 +17,6 @@ public class ListController {
 	@Autowired
 	private MusicDAO mdao = MusicDAO.getInstance();
 	
-	ArrayList<Integer> orderArray = new ArrayList<Integer>();
-	
 	@RequestMapping(value="/albums")
 	public String listAlbums(Model model) {
 		model.addAttribute("albums", this.mdao.findAllRecordings());
