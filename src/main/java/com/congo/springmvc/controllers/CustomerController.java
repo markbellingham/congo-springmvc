@@ -23,6 +23,8 @@ public class CustomerController {
 	public String login(Model model) {
 		model.addAttribute("msg", "Please Enter Your Login Details");
 		model.addAttribute("msg2", "Please enter your details to register");
+		CongoCustomers customer = new CongoCustomers(); 
+		model.addAttribute("CongoCustomers", customer);
 		return "login";
 	}
 	
@@ -43,5 +45,17 @@ public class CustomerController {
             return "login";
         }
     }
-
+    
+    @RequestMapping(value="/login",method = RequestMethod.POST, params={"fname","lname","address1","city","postcode","phone","email","password"})
+    public String register(Model model, HttpSession session, @ModelAttribute("CongoCustomers") CongoCustomers user) {
+    	Boolean result = cdao.insertNewCustomer(user);
+    	if (result) {
+    		model.addAttribute("customer", user);
+    		session.setAttribute("customer", user);
+    		return "logged-in";
+    	} else {
+    		model.addAttribute("error", "Sorry there was an error.");
+    		return "login";
+    	}
+    }
 }

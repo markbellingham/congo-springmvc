@@ -19,5 +19,3 @@ function change_tab (type, elmnt, color) {
     elmnt.style.backgroundColor = color;
 }
 
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("login_tab").click();

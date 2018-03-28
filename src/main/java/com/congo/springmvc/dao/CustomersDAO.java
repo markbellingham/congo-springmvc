@@ -17,7 +17,10 @@ public class CustomersDAO {
 	
 	// SQL Queries
 	private static String FIND_ALL_CUSTOMERS = "SELECT * FROM congo_customers";
-	private static String FIND_CUSTOMER_BY_EMAIL = "SELECT * FROM congo_customers WHERE email = ?"; 
+	private static String FIND_CUSTOMER_BY_EMAIL = "SELECT * FROM congo_customers WHERE email = ?";
+	private static String INSERT_NEW_CUSTOMER = "INSERT INTO congo_customers "
+			+ "(fname, lname, address1, address2, city, postcode, phone, email, password, admin) "
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	public ArrayList<CongoCustomers> findAllCustomers() {
 		ArrayList<CongoCustomers> customers = new ArrayList<CongoCustomers>();
@@ -70,6 +73,31 @@ public class CustomersDAO {
 			DBConnection.closeConnection(conn);
 		}
 		return customer;
+	}
+	
+	public boolean insertNewCustomer(CongoCustomers c) {
+		boolean t = true;
+		try {
+			conn = new DBConnection().openConnection();
+			statement = conn.prepareStatement(INSERT_NEW_CUSTOMER);
+			statement.setString(1, c.getFname());
+			statement.setString(2, c.getLname());
+			statement.setString(3, c.getAddress1());
+			statement.setString(4, c.getAddress2());
+			statement.setString(5, c.getCity());
+			statement.setString(6, c.getPostcode());
+			statement.setString(7, c.getPhone());
+			statement.setString(8, c.getEmail());
+			statement.setString(9, c.getPassword());
+			statement.setInt(10, 0);
+			statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection(conn);
+		}
+		return t;
 	}
 	
 	/**

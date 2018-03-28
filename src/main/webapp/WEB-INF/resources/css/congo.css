@@ -160,6 +160,10 @@ a.th {
 #login, #register {
 	width: 100%;
 }
+#login td, #register td {
+	padding: 5px;
+	color: white;
+}
 
 /* Style the tab buttons */
 .tablink {
@@ -186,5 +190,7 @@ a.th {
 }
 
 /* Style each tab content individually */
-#login {background-color:red;}
-#register {background-color:green;}
+#login {background-color:#0b5000;}
+#register {background-color:#777;}
+
+
