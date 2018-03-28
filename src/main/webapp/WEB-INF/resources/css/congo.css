@@ -146,3 +146,45 @@ a.th {
 	font-weight: bold;
 	border: none;
 }
+
+/*
+* Login/Register page styles
+*/
+
+/* Container for the main divs */
+#login-register-container {
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+#login, #register {
+	width: 100%;
+}
+
+/* Style the tab buttons */
+.tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 50%;
+}
+
+/* Change background color of buttons on hover */
+.tablink:hover {
+    background-color: #777;
+}
+
+/* Set default styles for tab content */
+.tabcontent {
+    color: white;
+    display: none;
+}
+
+/* Style each tab content individually */
+#login {background-color:red;}
+#register {background-color:green;}

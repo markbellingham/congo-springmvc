@@ -22,14 +22,15 @@ public class CustomerController {
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String login(Model model) {
 		model.addAttribute("msg", "Please Enter Your Login Details");
+		model.addAttribute("msg2", "Please enter your details to register");
 		return "login";
 	}
 	
     @RequestMapping(value="/login",method = RequestMethod.POST, params={"email","password"})
-    public String submit(Model model, HttpSession session, @ModelAttribute("CongoCustomers") CongoCustomers customer, String email, String password) {
-    	customer = cdao.findCustomerByEmail(email);
-        if (customer != null && customer.getEmail() != null & customer.getPassword() != null) {
-            if (customer.getEmail().equals(email) && customer.getPassword().equals(password)) {            	
+    public String submit(Model model, HttpSession session, @ModelAttribute("CongoCustomers") CongoCustomers user) {
+        if (user != null && user.getEmail() != null && user.getPassword() != null) {
+        	CongoCustomers customer = cdao.findCustomerByEmail(user.getEmail());
+            if (user.getPassword().equals(customer.getPassword())) {
                 model.addAttribute("customer", customer);
                 session.setAttribute("customer", customer);
                 return "logged-in";
