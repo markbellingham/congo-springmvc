@@ -48,6 +48,14 @@ public class CustomerController {
     
     @RequestMapping(value="/login",method = RequestMethod.POST, params={"fname","lname","address1","city","postcode","phone","email","password"})
     public String register(Model model, HttpSession session, @ModelAttribute("CongoCustomers") CongoCustomers user) {
+    	
+    	// First check the email address does not already exist in the system
+    	if (CongoCustomers.checkEmail(user.getEmail())) {
+    		model.addAttribute("error", "Sorry, that email address is already registered. Did you forget your password?");
+    		return "login";
+    	}
+    	
+    	// Then register the user and log them in
     	Boolean result = cdao.insertNewCustomer(user);
     	if (result) {
     		model.addAttribute("customer", user);
