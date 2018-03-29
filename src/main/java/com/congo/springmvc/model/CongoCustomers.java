@@ -1,5 +1,9 @@
 package com.congo.springmvc.model;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.congo.springmvc.dao.CustomersDAO;
 
 public class CongoCustomers {
@@ -85,7 +89,8 @@ public class CongoCustomers {
 	
 	public static boolean checkEmail(String email) {
 		CustomersDAO cdao = CustomersDAO.getInstance();
-		if(cdao.findCustomerByEmail(email) != null) {
+		CongoCustomers customer = cdao.findCustomerByEmail(email);
+		if(customer.getFname() != null) {
 			return true;
 		} else {
 			return false;

@@ -5,5 +5,7 @@
 
 	<bean id="MusicDAO" class="com.congo.springmvc.dao.MusicDAO"/>
 	<bean id="CustomerDAO" class="com.congo.springmvc.dao.CustomersDAO"/>
+	
+	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
 </beans>
