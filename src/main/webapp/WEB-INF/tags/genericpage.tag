@@ -12,7 +12,7 @@
 <div id="wrapper">
 		<c:choose>
 			<c:when test="${customer.loggedIn == true}">
-				Welcome ${customer.fname} ${customer.lname}.
+				Welcome ${customer.fname} ${customer.lname}. <a href="<spring:url value="/customer/logout"/>">Log out</a>
 			</c:when>
 			<c:otherwise>
 				Please log in to add items to the basket.

@@ -39,7 +39,6 @@ public class CustomerController {
         	
         	if(passwordEncoder.matches(user.getPassword(), customer.getPassword())) {
         		customer.setLoggedIn(true);
-        		System.out.println(customer);
                 model.addAttribute("customer", customer);
                 session.setAttribute("customer", customer);
                 return "logged-in";        		
@@ -70,7 +69,6 @@ public class CustomerController {
     	Boolean result = cdao.insertNewCustomer(user);
     	if (result) {
     		user.setLoggedIn(true);
-    		System.out.println(user);
     		model.addAttribute("customer", user);
     		session.setAttribute("customer", user);
     		return "logged-in";
@@ -78,5 +76,11 @@ public class CustomerController {
     		model.addAttribute("error", "Sorry there was an error.");
     		return "login";
     	}
+    }
+    
+    @RequestMapping(value="/logout",method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+    	session.invalidate();
+    	return "home";
     }
 }
