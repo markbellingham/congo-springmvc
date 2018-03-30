@@ -42,14 +42,14 @@
 					<td class="center">${album.num_tracks}</td>
 					<td class="right">£${album.price}</td>
 					<form action="<spring:url value="/order/add-to-order/${album.recordingId}"/>" method="post">
-				    <c:choose>
-                        <c:when test="${album.stockCount > '0'}">
-                            <td class="center"><button>Add</button></td>
-                        </c:when>
-                        <c:otherwise>
-                            <td class="center"><button disabled>Add</button></td>
-                        </c:otherwise>
-                    </c:choose>
+						<c:choose>
+					   		<c:when test="${(customer.loggedIn != null) && (customer.loggedIn == true) && (album.stockCount > '0')}">
+						    	<td class="center"><button>Add</button></td>
+							</c:when>
+							<c:otherwise>
+						    	<td class="center"><button disabled>Add</button></td>
+							</c:otherwise>
+						</c:choose>
                     </form>
 				</tr>
 			</c:forEach>

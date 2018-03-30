@@ -38,6 +38,8 @@ public class CustomerController {
         	CongoCustomers customer = cdao.findCustomerByEmail(user.getEmail());
         	
         	if(passwordEncoder.matches(user.getPassword(), customer.getPassword())) {
+        		customer.setLoggedIn(true);
+        		System.out.println(customer);
                 model.addAttribute("customer", customer);
                 session.setAttribute("customer", customer);
                 return "logged-in";        		
@@ -67,6 +69,8 @@ public class CustomerController {
     	// Then register the user and log them in
     	Boolean result = cdao.insertNewCustomer(user);
     	if (result) {
+    		user.setLoggedIn(true);
+    		System.out.println(user);
     		model.addAttribute("customer", user);
     		session.setAttribute("customer", user);
     		return "logged-in";

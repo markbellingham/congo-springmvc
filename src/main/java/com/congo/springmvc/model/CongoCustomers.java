@@ -1,9 +1,5 @@
 package com.congo.springmvc.model;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.congo.springmvc.dao.CustomersDAO;
 
 public class CongoCustomers {
@@ -20,6 +16,25 @@ public class CongoCustomers {
 	private String password;
 	private int admin;
 	
+	private boolean loggedIn;
+	
+	public CongoCustomers(int custId, String fname, String lname, String address1, String address2, String city,
+			String postcode, String phone, String email, String password, int admin, boolean loggedIn) {
+		super();
+		this.custId = custId;
+		this.fname = fname;
+		this.lname = lname;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.city = city;
+		this.postcode = postcode;
+		this.phone = phone;
+		this.email = email;
+		this.password = password;
+		this.admin = admin;
+		this.loggedIn = loggedIn;
+	}
+	
 	public CongoCustomers(int custId, String fname, String lname, String address1, String address2, String city,
 			String postcode, String phone, String email, String password, int admin) {
 		super();
@@ -34,7 +49,7 @@ public class CongoCustomers {
 		this.email = email;
 		this.password = password;
 		this.admin = admin;
-	}	
+	}
 
 	public CongoCustomers(int custId, String fname, String lname, String email) {
 		super();
@@ -50,7 +65,7 @@ public class CongoCustomers {
 	public String toString() {
 		return "CongoCustomers [custId=" + custId + ", fname=" + fname + ", lname=" + lname + ", address1=" + address1
 				+ ", address2=" + address2 + ", city=" + city + ", postcode=" + postcode + ", phone=" + phone
-				+ ", email=" + email + ", password=" + password + ", admin=" + admin + "]";
+				+ ", email=" + email + ", password=" + password + ", admin=" + admin + ", loggedIn=" + loggedIn + "]";
 	}
 
 	public int getCustId() { return custId; }
@@ -86,6 +101,10 @@ public class CongoCustomers {
 	public int getAdmin() { return admin; }
 	public void setAdmin(int admin) { this.admin = admin; }
 	
+	
+	public boolean isLoggedIn() { return loggedIn; }
+	public void setLoggedIn(boolean loggedIn) { this.loggedIn = loggedIn; }
+
 	
 	public static boolean checkEmail(String email) {
 		CustomersDAO cdao = CustomersDAO.getInstance();
