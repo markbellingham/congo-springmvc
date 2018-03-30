@@ -10,6 +10,14 @@
     <link href="${pageContext.request.contextPath}/resources/css/congo.css" rel="stylesheet" />
 </head>
 <div id="wrapper">
+		<c:choose>
+			<c:when test="${customer.loggedIn == true}">
+				Welcome ${customer.fname} ${customer.lname}.
+			</c:when>
+			<c:otherwise>
+				Please log in to add items to the basket.
+			</c:otherwise>
+		</c:choose>
 	<div id="pageheader">
 	   	<h1 id="name">Congo's Music Store</h1>
 	   	<img id="logo" src="${pageContext.request.contextPath}/resources/images/congo_logo.png"/>
