@@ -23,6 +23,7 @@
 			
 			<!-- Tab Content -->
 			<div id="login" class="login-register tabcontent">
+			<br/><br/>
 				<form:form name="login" method="POST" modelAttribute="CongoCustomers">
 			        <div align="center">
 			        <div>${msg}</div>
@@ -45,6 +46,7 @@
 			    </form:form>
 		    </div> <!-- ends login -->
 		    <div id="register" class="login-register tabcontent">
+		    <br/><br/>
 		    	<form:form name="register" method="POST" modelAttribute="CongoCustomers">
 		    		<div align="center">
 		    			<div>${msg2}</div>
