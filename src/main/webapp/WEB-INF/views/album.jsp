@@ -14,7 +14,7 @@
 	   	</jsp:attribute>
 		<jsp:body>
 			<p>
-				<a href="<spring:url value="/albums/"/>">See a list of all our albums!</a>
+				<center><a href="<spring:url value="/albums/"/>">See a list of all our albums!</a></center>
 			</p>
 			<br />
 			<br />
@@ -37,6 +37,20 @@
 							   <td class="right">${track.strDuration}</td>
 							</tr>
 						</c:forEach>
+						<tr>
+							<td class="right" colspan="3" style="border: none">
+								<form action="<spring:url value="/order/add-to-order/${album.recordingId}"/>" method="post">
+									<c:choose>
+								   		<c:when test="${(customer.loggedIn != null) && (customer.loggedIn == true) && (album.stockCount > '0')}">
+									    	<button>Add to basket</button>
+										</c:when>
+										<c:otherwise>
+									    	<button disabled>Add to basket</button>
+										</c:otherwise>
+									</c:choose>
+								</form>
+							</td>
+						</tr>
 					</table>
 				</div> <!-- ends album-tracks -->
 			</div> <!-- ends album-container -->
