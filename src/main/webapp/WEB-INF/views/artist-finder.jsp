@@ -36,16 +36,18 @@
 					<td class="left"><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
 					<td class="center">${album.num_tracks}</td>
 					<td class="right">£${album.price}</td>
-					<form action="<spring:url value="/order/add-to-order/${album.recordingId}"/>" method="post">
-						<c:choose>
-					   		<c:when test="${(customer.loggedIn != null) && (customer.loggedIn == true) && (album.stockCount > '0')}">
-						    	<td class="center"><button>Add</button></td>
-							</c:when>
-							<c:otherwise>
-						    	<td class="center"><button disabled>Add</button></td>
-							</c:otherwise>
-						</c:choose>
-                    </form>
+					<td class="center">
+						<form action="<spring:url value="/order/add-to-order/${album.recordingId}"/>" method="post">
+							<c:choose>
+						   		<c:when test="${(customer.loggedIn != null) && (customer.loggedIn == true) && (album.stockCount > '0')}">
+							    	<button>Add</button>
+								</c:when>
+								<c:otherwise>
+							    	<button disabled>Add</button>
+								</c:otherwise>
+							</c:choose>
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
