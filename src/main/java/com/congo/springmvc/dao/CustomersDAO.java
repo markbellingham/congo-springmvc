@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.congo.springmvc.model.CongoCustomers;
+import com.congo.springmvc.model.OrderDetails;
 
 public class CustomersDAO {
 	
@@ -21,6 +22,9 @@ public class CustomersDAO {
 	private static String INSERT_NEW_CUSTOMER = "INSERT INTO congo_customers "
 			+ "(fname, lname, address1, address2, city, postcode, phone, email, password, admin) "
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static String FIND_ALL_MY_ORDERS = "SELECT * FROM congo_orders o, congo_order_details d, Music_Recordings r "
+			+ "WHERE o.custid = ? AND o.orderid = d.orderid AND d.recording_id = r.recording_id ORDER BY o.order_date";
+	
 	
 	public ArrayList<CongoCustomers> findAllCustomers() {
 		ArrayList<CongoCustomers> customers = new ArrayList<CongoCustomers>();
@@ -124,6 +128,31 @@ public class CustomersDAO {
 			customers.add(customer);
 		}
 		return customers;
+	}
+	
+	public ArrayList<OrderDetails> findAllMyOrders(int custId) {
+		ArrayList<OrderDetails> orders = new ArrayList<OrderDetails>();
+		try {
+			conn = new DBConnection().openConnection();
+			statement = conn.prepareStatement(FIND_ALL_MY_ORDERS);
+			statement.setInt(1, custId);
+			resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				OrderDetails order = new OrderDetails();
+				order.setArtistName(resultSet.getString("artist_name"));
+				order.setRecordingId(resultSet.getInt("recording_id"));
+				order.setTitle(resultSet.getString("title"));
+				order.setPrice(resultSet.getFloat("price"));
+				order.setOrderQuantity(resultSet.getInt("order_quantity"));
+				order.setOrderDate(resultSet.getString("order_date"));
+				orders.add(order);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection(conn);
+		}
+		return orders;
 	}
 	
 	/**

@@ -1,5 +1,7 @@
 package com.congo.springmvc.controllers;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.congo.springmvc.dao.CustomersDAO;
 import com.congo.springmvc.model.CongoCustomers;
+import com.congo.springmvc.model.OrderDetails;
 
 @Controller
 @RequestMapping("/customer")
@@ -82,5 +85,20 @@ public class CustomerController {
     public String logout(HttpSession session) {
     	session.invalidate();
     	return "home";
+    }
+    
+    @RequestMapping(value="/show-all-my-orders")
+    public String showAllOrders(Model model, HttpSession session, @ModelAttribute("CongoCustomers") CongoCustomers user) {
+    	user = (CongoCustomers) session.getAttribute("customer");
+    	if (user != null && user.isLoggedIn() == true) {
+    		int custId = user.getCustId();
+    		ArrayList<OrderDetails> orders = cdao.findAllMyOrders(custId);
+    		model.addAttribute("orders", orders);
+    		return "show-all-my-orders";
+    	} else {
+    		model.addAttribute("error", "You need to log in first.");
+    		return "login";
+    	}
+    	
     }
 }

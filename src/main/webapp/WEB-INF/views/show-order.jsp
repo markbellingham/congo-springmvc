@@ -23,7 +23,7 @@
 			<c:forEach items="${order}" var="album">
 			<tr>
 				<td class="center"><a href="<spring:url value="${album.recordingId}"/>">
-				    <img src="${pageContext.request.contextPath}/resources/images/covers/sm/${album.imageName}"/></a></td>
+				    <img src="/resources/images/covers/sm/${album.imageName}"/></a></td>
 				<td class="left"><a href="<spring:url value="/artist/${album.artistName}"/>">${album.artistName}</a></td>
 				<td class="left"><a href="<spring:url value="/albums/${album.recordingId}"/>">${album.title}</a></td>
 				<td class="left"><a href="<spring:url value="/categories/${album.category}"/>">${album.category}</a></td>
