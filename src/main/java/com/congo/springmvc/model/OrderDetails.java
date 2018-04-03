@@ -8,10 +8,11 @@ public class OrderDetails {
 	private float price;
 	private int orderQuantity;
 	private String orderDate;
+	private float totalPrice;
 	
 	
 	public OrderDetails(String artistName, int recordingId, String title, float price, int orderQuantity,
-			String orderDate) {
+			String orderDate, float totalPrice) {
 		super();
 		this.artistName = artistName;
 		this.recordingId = recordingId;
@@ -19,6 +20,7 @@ public class OrderDetails {
 		this.price = price;
 		this.orderQuantity = orderQuantity;
 		this.orderDate = orderDate;
+		this.totalPrice = totalPrice;
 	}
 
 	public OrderDetails() {
@@ -28,7 +30,8 @@ public class OrderDetails {
 	@Override
 	public String toString() {
 		return "OrderDetails [artistName=" + artistName + ", recordingId=" + recordingId + ", title=" + title
-				+ ", price=" + price + ", orderQuantity=" + orderQuantity + ", orderDate=" + orderDate + "]";
+				+ ", price=" + price + ", orderQuantity=" + orderQuantity + ", orderDate=" + orderDate + ", totalPrice="
+				+ totalPrice + "]";
 	}
 
 	public String getArtistName() {
@@ -79,6 +82,12 @@ public class OrderDetails {
 		this.orderDate = orderDate;
 	}
 	
-	
+	public float getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(float totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	
 }

@@ -21,13 +21,12 @@
 				<c:forEach items="${orders}" var="order">
 					<tr>
 						<td class="center"><a href="<spring:url value="${order.recordingId}"/>">
-				    		<img src="${pageContext.request.contextPath}/resources/images/covers/sm/${order.recordingId}"/></a></td>
+				    		<img src="${pageContext.request.contextPath}/resources/images/covers/sm/${order.recordingId}.jpg"/></a></td>
 				    	<td class="left"><a href="<spring:url value="/artist/${order.artistName}"/>">${order.artistName}</a></td>
 						<td class="left"><a href="<spring:url value="/albums/${order.recordingId}"/>">${order.title}</a></td>
 						<td class="right">£${order.price}</td>
 						<td class="center">${order.orderQuantity}</td>
-						<td></td>
-<%-- 						<td class="right">£${order.totalPrice}</td> --%>
+						<td class="right">£${order.totalPrice}</td>
 						<td class="right">${order.orderDate}</td>
 					</tr>
 				</c:forEach>

@@ -144,6 +144,8 @@ public class CustomersDAO {
 				order.setTitle(resultSet.getString("title"));
 				order.setPrice(resultSet.getFloat("price"));
 				order.setOrderQuantity(resultSet.getInt("order_quantity"));
+				float totalPrice = order.getPrice() * order.getOrderQuantity();
+				order.setTotalPrice(totalPrice);
 				order.setOrderDate(resultSet.getString("order_date"));
 				orders.add(order);
 			}
