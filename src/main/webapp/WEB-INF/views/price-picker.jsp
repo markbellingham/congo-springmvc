@@ -20,9 +20,9 @@
 			<select name="price" onchange="this.form.submit()">
 				<option>Select Price</option>
 				<option value="10">Under £10</option>
-				<option value="12">£10 < £12</option>
-				<option value="14">£12 < £14</option>
-				<option value="16">$14 < £16</option>				
+				<option value="12">£10 &lt; £12</option>
+				<option value="14">£12 &lt; £14</option>
+				<option value="16">$14 &lt; £16</option>				
 			</select>
 		</form>
 		</div> <!-- ends selector -->
