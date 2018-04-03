@@ -10,12 +10,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.congo.springmvc.dao.CustomersDAO;
 import com.congo.springmvc.dao.MusicDAO;
+import com.congo.springmvc.model.CongoCustomers;
 import com.congo.springmvc.model.MusicRecordings;
+import com.congo.springmvc.model.OrderDetails;
 
 @Controller
 @RequestMapping("/order")
@@ -23,6 +27,7 @@ public class OrdersController {
 	
 	@Autowired
 	private MusicDAO mdao = MusicDAO.getInstance();
+	private CustomersDAO cdao = CustomersDAO.getInstance();
 	
 	ArrayList<Integer> orderArray = new ArrayList<Integer>();
 	
@@ -88,6 +93,21 @@ public class OrdersController {
 		}
 		return "show-order";
 	}
+	
+    @RequestMapping(value="/show-all-my-orders")
+    public String showAllOrders(Model model, HttpSession session, @ModelAttribute("CongoCustomers") CongoCustomers user) {
+    	user = (CongoCustomers) session.getAttribute("customer");
+    	if (user != null && user.isLoggedIn() == true) {
+    		int custId = user.getCustId();
+    		ArrayList<OrderDetails> orders = cdao.findAllMyOrders(custId);
+    		model.addAttribute("orders", orders);
+    		return "show-all-my-orders";
+    	} else {
+    		model.addAttribute("error", "You need to log in first.");
+    		return "login";
+    	}
+    	
+    }
 	
 	/**
 	* Returns the viewName to return for coming back to the sender URL

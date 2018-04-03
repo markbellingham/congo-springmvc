@@ -87,18 +87,4 @@ public class CustomerController {
     	return "home";
     }
     
-    @RequestMapping(value="/show-all-my-orders")
-    public String showAllOrders(Model model, HttpSession session, @ModelAttribute("CongoCustomers") CongoCustomers user) {
-    	user = (CongoCustomers) session.getAttribute("customer");
-    	if (user != null && user.isLoggedIn() == true) {
-    		int custId = user.getCustId();
-    		ArrayList<OrderDetails> orders = cdao.findAllMyOrders(custId);
-    		model.addAttribute("orders", orders);
-    		return "show-all-my-orders";
-    	} else {
-    		model.addAttribute("error", "You need to log in first.");
-    		return "login";
-    	}
-    	
-    }
 }
