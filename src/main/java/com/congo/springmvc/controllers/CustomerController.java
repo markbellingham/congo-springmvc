@@ -1,7 +1,5 @@
 package com.congo.springmvc.controllers;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.congo.springmvc.dao.CustomersDAO;
 import com.congo.springmvc.model.CongoCustomers;
-import com.congo.springmvc.model.OrderDetails;
 
 @Controller
 @RequestMapping("/customer")
