@@ -108,7 +108,7 @@ public class MusicDAO {
 		try {
 			conn = new DBConnection().openConnection();
 			statement = conn.prepareStatement(FIND_ALBUMS_BY_ARTIST);
-			statement.setString(1, name);
+			statement.setString(1, "%" + name + "%");
 			resultSet = statement.executeQuery();
 			albums = addToArray(resultSet);
 			resultSet.close();
